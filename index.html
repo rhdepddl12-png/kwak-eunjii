@@ -1,0 +1,1534 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>여주메이크업연구소</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Great+Vibes&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+/* 레이아웃: 만화 컷처럼 굵은 잉크 테두리 + 오프셋 그림자 패널, 하프톤 도트 배경. 단일 테마(밝은 종이 위 잉크). */
+:root{
+  --ink:#2b1e2a;
+  --paper:#fcf8f7;
+  --pink:#e2457d;
+  --blush:#ffd3e3;
+  --lilac:#b49bff;
+  --mint:#6fdcc2;
+  --butter:#ffe17a;
+  --muted:#6e6487;
+  --line:#eee2e7;
+  --line2:#d9c7d0;
+  --ok:#1f9d6b;
+  --warn:#d98200;
+  --bad:#d6334f;
+  --display:"Gowun Batang","Noto Sans KR",system-ui,sans-serif;
+  --body:"Noto Sans KR",system-ui,-apple-system,"Apple SD Gothic Neo",sans-serif;
+  --r:16px;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img,svg{max-width:100%}
+h1,h2,h3,h4{font-family:var(--display);font-weight:700;line-height:1.2;text-wrap:balance;margin:0}
+p{margin:0}
+a{color:inherit}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--pink);outline-offset:2px}
+.num{font-variant-numeric:tabular-nums}
+.wrap{max-width:1160px;margin:0 auto;padding:0 18px}
+.dots{background:linear-gradient(180deg,#fdf6f6,#f8eeef)}
+.panel{background:#fff;border:1px solid var(--line);border-radius:var(--r);box-shadow:0 10px 30px -14px rgba(80,40,60,.28)}
+.btn{border-color:var(--ink)!important;display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:11px 20px;font-weight:700;background:#fff;box-shadow:0 10px 30px -14px rgba(80,40,60,.28);transition:transform .12s,box-shadow .12s;text-decoration:none;white-space:nowrap}
+.btn:hover{transform:translateY(-1px)}
+.btn:active{transform:none}
+.btn.pink{background:var(--pink);color:#fff}
+.btn.naver{background:#03c75a;color:#fff}
+.btn.ink{background:var(--ink);color:#fff}
+.btn.sm{padding:7px 14px;font-size:13px}
+.btn.block{width:100%}
+.btn[disabled]{opacity:.45;pointer-events:none}
+.chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line2);border-radius:999px;padding:3px 11px;font-size:12px;font-weight:700;background:#fff}
+.chip.on{background:var(--ink);color:#fff}
+.tag{display:inline-block;font-size:11px;font-weight:900;padding:2px 8px;border-radius:6px;background:var(--butter);border:1px solid var(--line2)}
+.tag.pink{background:var(--pink);color:#fff}
+.tag.mint{background:var(--mint)}
+.eyebrow{display:inline-block;font-size:12px;font-weight:900;letter-spacing:.16em;color:var(--pink)}
+.sec{padding:64px 0}
+.sec-head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:12px;margin-bottom:26px}
+.sec-head h2{font-size:clamp(26px,5vw,40px);margin-top:10px}
+.sec-head p{color:var(--muted);max-width:52ch}
+
+/* 상단 */
+.notice{background:var(--ink);color:#fff;font-size:13px;overflow:hidden;white-space:nowrap}
+.notice .track{display:inline-flex;gap:48px;padding:8px 0;animation:marq 28s linear infinite}
+@keyframes marq{to{transform:translateX(-50%)}}
+header.top{position:sticky;top:0;z-index:40;background:rgba(255,248,251,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:14px;height:64px}
+.logo{display:flex;align-items:center;gap:8px;font-family:var(--display);font-size:24px;text-decoration:none}
+.logo .mark{width:34px;height:34px}
+nav.main{display:flex;gap:4px;margin-left:auto}
+nav.main a{text-decoration:none;font-weight:700;font-size:14px;padding:8px 12px;border-radius:999px}
+nav.main a:hover{background:var(--blush)}
+.cart-btn{position:relative;margin-left:6px}
+.cart-btn .badge{position:absolute;top:-8px;right:-6px;background:var(--pink);color:#fff;border:1px solid var(--line2);border-radius:999px;min-width:24px;height:24px;font-size:12px;display:grid;place-items:center;padding:0 5px}
+.menu-btn{display:none}
+@media (max-width:860px){
+  nav.main{display:none;position:absolute;top:64px;left:0;right:0;flex-direction:column;background:var(--paper);border-bottom:1px solid var(--line);padding:10px 18px}
+  nav.main.open{display:flex}
+  .menu-btn{display:inline-flex;margin-left:auto}
+  .cart-btn{margin-left:0}
+}
+
+/* 히어로 */
+.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 80% at 80% 30%,#f9e3e6,transparent 70%);pointer-events:none}
+.hero .wrap{position:relative;display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:center;padding-top:48px;padding-bottom:52px}
+.hero h1{font-size:clamp(36px,6.4vw,64px);letter-spacing:-1px;font-weight:700}
+.hero h1 em{font-style:normal;color:var(--pink)}
+.hero .lead{font-size:17px;color:#4a3f63;margin:18px 0 26px;max-width:44ch}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:12px}
+.hero .stats{display:flex;flex-wrap:wrap;gap:22px;margin-top:30px}
+.hero .stats b{display:block;font-family:var(--display);font-size:26px}
+.hero .stats span{font-size:12.5px;color:var(--muted)}
+.eye-card{position:relative;padding:18px;transform:rotate(1.5deg)}
+.eye-card .bubble{position:absolute;left:-14px;top:-18px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:8px 14px;font-family:var(--display);font-size:16px;transform:rotate(-6deg)}
+.eye-card .bubble::after{content:"";position:absolute;left:28px;bottom:-12px;width:16px;height:16px;background:#fff;border-right:1px solid var(--line);border-bottom:1px solid var(--line);transform:rotate(45deg)}
+.swatch-row{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.sw{width:30px;height:30px;border-radius:50%;border:1px solid var(--line2)}
+.sparkle{position:absolute;color:var(--butter);-webkit-text-stroke:1.5px var(--ink);font-size:30px;animation:tw 2.4s ease-in-out infinite}
+@keyframes tw{50%{transform:scale(.6) rotate(20deg);opacity:.6}}
+@media (max-width:860px){.hero .wrap{grid-template-columns:1fr}.compare{max-width:520px;margin:10px auto 0;width:100%}}
+
+/* 혜택 띠 */
+.perks{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:-28px;position:relative;z-index:2}
+.perk{padding:14px 16px;display:flex;gap:12px;align-items:center}
+.perk .ic{flex:none;width:42px;height:42px;border-radius:12px;border:1px solid var(--line2);display:grid;place-items:center;font-family:var(--display);font-size:18px}
+.perk b{display:block;font-size:14px}
+.perk span{font-size:12px;color:var(--muted)}
+@media (max-width:860px){.perks{grid-template-columns:1fr 1fr}}
+
+/* 퀴즈 */
+.quiz{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.quiz .q{padding:22px}
+.qstep{font-family:var(--display);font-size:14px;color:var(--pink)}
+.qtitle{font-family:var(--display);font-size:24px;margin:6px 0 16px}
+.opts{display:grid;gap:10px}
+.opt{text-align:left;border:1px solid var(--line2);border-radius:12px;padding:12px 14px;background:#fff;font-weight:500}
+.opt:hover{background:var(--blush)}
+.prog{height:10px;border:1px solid var(--line2);border-radius:999px;overflow:hidden;margin-top:18px}
+.prog i{display:block;height:100%;background:var(--pink);transition:width .3s}
+.result{padding:22px;display:flex;flex-direction:column;gap:12px}
+@media (max-width:860px){.quiz{grid-template-columns:1fr}}
+
+/* 룩 컬렉션 */
+.looks{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.look{display:flex;flex-direction:column;overflow:hidden}
+.look .art{aspect-ratio:16/10;border-bottom:1px solid var(--line);position:relative;display:grid;place-items:center}
+.look .art canvas{width:100%;height:100%;object-fit:cover;display:block}
+.look .body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:10px;flex:1}
+.look h3{font-size:22px}
+.look .mood{font-size:13px;color:var(--muted)}
+.look ol{margin:0;padding-left:20px;font-size:13.5px;color:#3e3458}
+.look .foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:10px;padding-top:6px}
+.price{font-weight:900;font-size:18px}
+.price s{color:var(--muted);font-weight:400;font-size:13px;margin-right:6px}
+.price .off{color:var(--pink);margin-right:6px}
+@media (max-width:980px){.looks{grid-template-columns:1fr 1fr}}
+@media (max-width:620px){.looks{grid-template-columns:1fr}}
+
+/* 숍 */
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.filters .chip{cursor:pointer;padding:6px 14px;font-size:13px}
+.sortsel{margin-left:auto;border:1px solid var(--line2);border-radius:999px;padding:6px 12px;background:#fff;font-weight:700;font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.card{display:flex;flex-direction:column;overflow:hidden;cursor:pointer}
+.card .pic{aspect-ratio:1;border-bottom:1px solid var(--line);display:grid;place-items:center;position:relative}
+.card .pic svg{width:100%;height:100%;display:block}
+.card .pic .tags{position:absolute;left:10px;top:10px;display:flex;gap:4px;flex-wrap:wrap}
+.card .info{padding:12px 14px 14px;display:flex;flex-direction:column;gap:4px;flex:1}
+.card .cat{font-size:11.5px;color:var(--muted);font-weight:700}
+.card .nm{font-weight:700;font-size:14.5px;line-height:1.35}
+.card .rv{font-size:12px;color:var(--muted)}
+.card .add{margin-top:auto;padding-top:8px;display:flex;gap:6px}
+.card .add .btn{flex:1;padding:7px 8px;font-size:12.5px;box-shadow:0 10px 30px -14px rgba(80,40,60,.28)}
+@media (max-width:980px){.grid{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:700px){.grid{grid-template-columns:1fr 1fr;gap:12px}.card .nm{font-size:13.5px}}
+
+/* 구독 */
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.plan{padding:24px;display:flex;flex-direction:column;gap:12px;position:relative}
+.plan.best{background:var(--blush)}
+.plan .ribbon{position:absolute;top:-14px;right:18px}
+.plan h3{font-size:26px}
+.plan .pp{font-family:var(--display);font-size:34px}
+.plan .pp small{font-family:var(--body);font-size:14px;color:var(--muted)}
+.plan ul{margin:0;padding:0;list-style:none;display:grid;gap:7px;font-size:14px}
+.plan li::before{content:"✦ ";color:var(--pink)}
+.plan .btn{margin-top:auto}
+@media (max-width:860px){.plans{grid-template-columns:1fr}}
+
+/* 클래스 */
+.classes{display:grid;grid-template-columns:1.2fr .8fr;gap:22px}
+.cls-list{display:grid;gap:14px}
+.cls{padding:16px 18px;display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;cursor:pointer}
+.cls input{width:20px;height:20px;accent-color:var(--pink)}
+.cls.sel{background:var(--blush)}
+.cls b{font-size:16px}
+.cls span{display:block;font-size:13px;color:var(--muted)}
+.booking{padding:20px;display:flex;flex-direction:column;gap:12px}
+.slots{display:flex;flex-wrap:wrap;gap:8px}
+.slot{border:1px solid var(--line2);border-radius:10px;padding:6px 10px;background:#fff;font-size:13px;font-weight:700}
+.slot.on{background:var(--ink);color:#fff}
+.slot[disabled]{opacity:.35;text-decoration:line-through}
+@media (max-width:860px){.classes{grid-template-columns:1fr}}
+
+/* 멤버십 */
+.tiers{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.tier{padding:18px;display:flex;flex-direction:column;gap:8px}
+.tier .lv{font-family:var(--display);font-size:20px}
+.tier .cond{font-size:12.5px;color:var(--muted)}
+.tier ul{margin:0;padding-left:18px;font-size:13.5px}
+@media (max-width:860px){.tiers{grid-template-columns:1fr 1fr}}
+
+/* 크리에이터 */
+.creator{display:grid;grid-template-columns:1fr 1fr;gap:22px;padding:26px}
+.calc-row{display:grid;gap:6px;margin-bottom:12px}
+.calc-row label{font-size:13px;font-weight:700}
+input[type=range]{width:100%;accent-color:var(--pink)}
+.big{font-family:var(--display);font-size:34px;color:var(--pink)}
+@media (max-width:860px){.creator{grid-template-columns:1fr}}
+
+/* FAQ */
+.faq{display:grid;gap:12px}
+.faq details{padding:14px 18px}
+.faq summary{font-weight:700;cursor:pointer;list-style:none}
+.faq summary::before{content:"Q. ";color:var(--pink);font-family:var(--display)}
+.faq details p{margin-top:8px;color:#4a3f63;font-size:14px}
+
+footer{background:var(--ink);color:#e9e2f7;padding:40px 0 90px;font-size:13px}
+footer .cols{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:24px}
+footer h4{color:#fff;font-size:18px;margin-bottom:10px}
+footer a{color:#fff}
+footer .ph{color:var(--butter)}
+@media (max-width:760px){footer .cols{grid-template-columns:1fr}}
+
+/* 드로어/모달 */
+.scrim{position:fixed;inset:0;background:rgba(36,26,61,.45);z-index:80;display:none}
+.scrim.open{display:block}
+.drawer{position:fixed;top:0;right:0;height:100%;width:min(440px,100%);background:var(--paper);border-left:1px solid var(--line);z-index:90;transform:translateX(105%);transition:transform .25s;display:flex;flex-direction:column}
+.drawer.open{transform:none}
+.dr-head{display:flex;align-items:center;justify-content:space-between;padding:16px 18px;border-bottom:1px solid var(--line)}
+.dr-head h3{font-size:22px}
+.x{border:1px solid var(--line2);background:#fff;border-radius:50%;width:36px;height:36px;font-weight:900}
+.dr-body{flex:1;overflow:auto;padding:14px 18px;display:flex;flex-direction:column;gap:12px}
+.ci{display:grid;grid-template-columns:58px 1fr auto;gap:12px;align-items:center;padding:10px;border:1px solid var(--line2);border-radius:12px;background:#fff}
+.ci .th{width:58px;height:58px;border-radius:10px;border:1px solid var(--line2);display:grid;place-items:center;overflow:hidden}
+.ci .th svg{width:100%;height:100%;display:block}
+.ci .n{font-weight:700;font-size:13.5px;line-height:1.35}
+.ci .o{font-size:12px;color:var(--muted)}
+.qty{display:inline-flex;align-items:center;border:1px solid var(--line2);border-radius:999px;overflow:hidden;margin-top:4px}
+.qty button{border:0;background:#fff;width:28px;height:26px;font-weight:900}
+.qty span{min-width:24px;text-align:center;font-size:13px;font-weight:700}
+.rm{border:0;background:none;color:var(--muted);font-size:12px;text-decoration:underline}
+.ship-bar{padding:12px;border:1px dashed var(--line2);border-radius:12px;font-size:13px;background:#fff}
+.ship-bar .prog{margin-top:8px}
+.coupon{display:flex;gap:8px}
+.coupon input{flex:1;border:1px solid var(--line2);border-radius:999px;padding:8px 14px;background:#fff;min-width:0}
+.sum{display:grid;gap:6px;font-size:14px}
+.sum div{display:flex;justify-content:space-between}
+.sum .tot{font-size:18px;font-weight:900;border-top:1px solid var(--line2);padding-top:8px;margin-top:4px}
+.dr-foot{padding:14px 18px;border-top:1px solid var(--line);display:grid;gap:8px}
+.empty{text-align:center;color:var(--muted);padding:40px 10px}
+
+.modal{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:16px}
+.modal.open{display:flex}
+.modal .box{width:min(760px,100%);max-height:calc(100% - 20px);overflow:auto;background:var(--paper)}
+.m-head{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--paper);z-index:2}
+.m-head h3{font-size:22px}
+.m-body{padding:18px}
+.steps{display:flex;gap:6px;margin-bottom:16px}
+.steps span{flex:1;text-align:center;font-size:12px;font-weight:700;padding:6px 0;border:1px solid var(--line2);border-radius:999px;background:#fff;color:var(--muted)}
+.steps span.on{background:var(--ink);color:#fff}
+.form{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form .full{grid-column:1/-1}
+.fld{display:grid;gap:5px}
+.fld label{font-size:13px;font-weight:700}
+.fld input,.fld select,.fld textarea{border:1px solid var(--line2);border-radius:10px;padding:10px 12px;background:#fff;width:100%}
+.fld .err{color:var(--bad);font-size:12px;min-height:0}
+@media (max-width:560px){.form{grid-template-columns:1fr}}
+.pay-methods{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:6px 0 16px}
+.pm{border:1px solid var(--line);border-radius:14px;padding:14px;background:#fff;text-align:left;display:grid;gap:4px}
+.pm b{font-size:15px}
+.pm span{font-size:12.5px;color:var(--muted)}
+.pm.on{box-shadow:0 10px 30px -14px rgba(80,40,60,.28);background:var(--blush)}
+.pm .logo-n{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:6px;background:#03c75a;color:#fff;font-weight:900;font-size:15px}
+.pm .logo-b{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:6px;background:var(--ink);color:#fff;font-weight:900;font-size:13px}
+@media (max-width:560px){.pay-methods{grid-template-columns:1fr}}
+.paybox{border:1px solid var(--line);border-radius:14px;padding:16px;background:#fff;display:grid;gap:12px}
+.acct{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;background:var(--paper);border:1px dashed var(--line2);border-radius:12px;padding:12px 14px}
+.acct b{font-size:17px}
+.ss-items{display:grid;gap:8px}
+.ss-item{display:flex;justify-content:space-between;align-items:center;gap:10px;border:2px solid var(--line);border-radius:10px;padding:8px 12px;font-size:13.5px}
+.note{font-size:12.5px;color:var(--muted)}
+.radio-row{display:flex;gap:8px;flex-wrap:wrap}
+.radio-row label{border:1px solid var(--line2);border-radius:999px;padding:5px 12px;font-size:13px;font-weight:700;background:#fff;cursor:pointer}
+.radio-row input{accent-color:var(--pink)}
+.agree{display:flex;gap:8px;align-items:flex-start;font-size:13px}
+.agree input{margin-top:4px;accent-color:var(--pink);width:18px;height:18px}
+.done{text-align:center;display:grid;gap:12px;justify-items:center}
+.done .big-check{width:84px;height:84px;border-radius:50%;background:var(--mint);border:1px solid var(--line);display:grid;place-items:center;font-size:40px;font-weight:900}
+
+.pd{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.pd .pic{border:1px solid var(--line);border-radius:14px;aspect-ratio:1;display:grid;place-items:center}
+.pd .pic svg{width:100%;height:100%;display:block}
+.pd .meta{display:grid;gap:10px;align-content:start}
+.pd h3{font-size:26px}
+@media (max-width:600px){.pd{grid-template-columns:1fr}}
+
+.toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,140%);background:var(--ink);color:#fff;padding:12px 20px;border-radius:999px;font-weight:700;z-index:200;transition:transform .25s;font-size:14px;max-width:calc(100% - 32px);text-align:center}
+.toast.show{transform:translate(-50%,0)}
+.fab{position:fixed;right:16px;bottom:18px;z-index:50}
+
+/* 운영자 */
+#admin{display:none}
+body.admin #admin{display:block}
+body.admin #store{display:none}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px}
+.kpi{padding:16px}
+.kpi span{font-size:12.5px;color:var(--muted);font-weight:700}
+.kpi b{display:block;font-family:var(--display);font-size:28px;margin-top:4px}
+.kpi.good b{color:var(--ok)}
+.kpi.bad b{color:var(--bad)}
+@media (max-width:860px){.kpis{grid-template-columns:1fr 1fr}}
+.adm-grid{display:grid;grid-template-columns:360px 1fr;gap:22px;align-items:start}
+@media (max-width:960px){.adm-grid{grid-template-columns:1fr}}
+.sim{padding:18px;display:grid;gap:12px}
+.sim h3{font-size:20px}
+.sim .row{display:grid;grid-template-columns:1fr 120px;gap:8px;align-items:center;font-size:13px}
+.sim .row input{border:1px solid var(--line2);border-radius:8px;padding:6px 8px;text-align:right;background:#fff;width:100%}
+.sim .grp{font-family:var(--display);font-size:15px;color:var(--pink);margin-top:6px}
+.bars{display:grid;gap:10px}
+.bar{display:grid;grid-template-columns:150px 1fr 110px;gap:10px;align-items:center;font-size:13px}
+.bar .tr{height:22px;border:1px solid var(--line2);border-radius:8px;overflow:hidden;background:#fff}
+.bar .tr i{display:block;height:100%}
+.bar .v{text-align:right;font-weight:700}
+@media (max-width:560px){.bar{grid-template-columns:96px 1fr 84px;font-size:12px}}
+.pl{width:100%;border-collapse:collapse;font-size:13.5px}
+.pl td{padding:7px 4px;border-bottom:1.5px solid var(--line)}
+.pl td:last-child{text-align:right;font-weight:700}
+.pl tr.t td{border-top:1px solid var(--line2);border-bottom:0;font-size:15px}
+.streams{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.stream{padding:16px;display:grid;gap:6px;align-content:start}
+.stream .no{font-family:var(--display);font-size:13px;color:#fff;background:var(--pink);border:1px solid var(--line2);border-radius:999px;width:fit-content;padding:1px 10px}
+.stream b{font-size:16px}
+.stream p{font-size:13px;color:#4a3f63}
+@media (max-width:860px){.streams{grid-template-columns:1fr}}
+.tbl-wrap{overflow-x:auto}
+.orders{width:100%;border-collapse:collapse;font-size:13px;min-width:720px}
+.orders th,.orders td{padding:9px 8px;border-bottom:1.5px solid var(--line);text-align:left;vertical-align:top}
+.orders th{font-size:12px;color:var(--muted)}
+.st{font-size:11.5px;font-weight:900;padding:2px 8px;border-radius:999px;border:1px solid var(--line2);white-space:nowrap}
+.st.wait{background:var(--butter)}
+.st.paid{background:var(--mint)}
+.st.ship{background:#bfe3ff}
+.st.ss{background:#c8f5d9}
+.st.cancel{background:#eee;color:var(--muted)}
+.orders select{border:1px solid var(--line2);border-radius:8px;padding:3px 6px;background:#fff;font-size:12px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* 실사 비교 & 구성품 */
+.compare{padding:14px}
+.cmp{position:relative;border-radius:14px;overflow:hidden;touch-action:pan-y}
+.cmp canvas{display:block;width:100%;height:auto;aspect-ratio:8/5;background:#eec3a8}
+.cmp .cmp-before{position:absolute;inset:0;clip-path:inset(0 55% 0 0)}
+.cmp-line{position:absolute;top:0;bottom:0;left:45%;width:2px;background:#fff;box-shadow:0 0 6px rgba(0,0,0,.25)}
+.cmp-lab{position:absolute;top:10px;font-size:11px;font-weight:900;letter-spacing:.14em;background:rgba(255,255,255,.88);padding:3px 9px;border-radius:999px}
+.cmp-lab.l{left:10px}.cmp-lab.r{right:10px}
+#cmpRange{margin-top:10px}
+.hero-looks{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.hero-looks .chip{cursor:pointer}
+.kit-title{font-size:12px;font-weight:900;letter-spacing:.1em;color:var(--muted)}
+.flat{border-radius:12px;overflow:hidden;border:1px solid var(--line)}
+.flat svg{display:block;width:100%;height:auto}
+.kit-list{list-style:none;padding:0;margin:0;display:grid;gap:5px;font-size:13px}
+.kit-list li{display:flex;gap:8px;align-items:center}
+.kit-list .n{flex:none;width:19px;height:19px;border-radius:50%;background:var(--ink);color:#fff;font-size:10.5px;display:grid;place-items:center;font-weight:900}
+.kit-list .s{margin-left:auto;color:var(--muted);font-size:12px;white-space:nowrap}
+.kit-list .d{flex:none;width:12px;height:12px;border-radius:50%;border:1px solid rgba(0,0,0,.12)}
+.photo-note{font-size:11.5px;color:var(--muted)}
+
+.hero{min-height:560px;display:flex;align-items:center;background:#e9cfe3}
+.hero::before{display:none}
+.hero-photo{position:absolute;inset:0;background:url("model.jpg") 70% 30%/cover no-repeat}
+.hero-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(248,232,242,.92) 0%,rgba(248,232,242,.75) 32%,rgba(248,232,242,0) 58%)}
+.hero .hero-inner{display:block;position:relative;padding-top:60px;padding-bottom:80px}
+.hero-text{max-width:520px}
+.tryon-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:22px;align-items:start}
+.tryon-grid .compare{max-width:none;margin:0}
+@media (max-width:860px){
+  .hero{display:block;min-height:0;background:var(--paper)}
+  .hero-photo{position:relative;inset:auto;aspect-ratio:4/3;background-position:78% 30%}
+  .hero-photo::after{background:linear-gradient(180deg,rgba(252,248,247,0) 70%,var(--paper) 100%)}
+  .hero .hero-inner{padding-top:4px;padding-bottom:56px}
+  .tryon-grid{grid-template-columns:1fr}
+}
+
+/* ===== 여주메이크업연구소 드리미 핑크 테마 ===== */
+:root{--ink:#4b2b46;--pink:#e2689b;--paper:#fbf1f6;--muted:#8d7189;--line:#f3dbe8;--line2:#ecc9db;--lilac:#c8a6ea;--blush:#fbdde9;--display:"Gowun Batang",serif}
+body{background:linear-gradient(180deg,#f6e1ee 0%,#f1e3f6 28%,#fbf2f7 60%,#f6ecf6 100%);color:var(--ink)}
+.panel{background:rgba(255,255,255,.64);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.95);border-radius:22px;box-shadow:0 14px 36px -16px rgba(214,100,155,.42)}
+.btn{border:1px solid rgba(226,104,155,.3)!important;background:rgba(255,255,255,.88);color:var(--ink);box-shadow:0 6px 16px -10px rgba(214,100,155,.6)}
+.btn.pink{background:linear-gradient(135deg,#f49cc0,#e2689b);color:#fff;border-color:transparent!important;box-shadow:0 10px 22px -10px rgba(226,104,155,.85)}
+.btn.naver{background:linear-gradient(135deg,#19cf68,#02b352);color:#fff;border-color:transparent!important}
+.btn.ink{background:#6a3f63;color:#fff}
+.btn.ghost{background:rgba(255,255,255,.72);font-weight:500}
+.chip{border:1px solid var(--line2);background:rgba(255,255,255,.85)}
+.chip.on{background:linear-gradient(135deg,#f49cc0,#e2689b);color:#fff;border-color:transparent}
+.notice{background:linear-gradient(90deg,#e58cb5,#c3a0e6)}
+.dots{background:transparent}
+.eyebrow{color:#d65c90}
+.price .off{color:#e2689b}
+.tag{border:0;background:#ffe7a8}.tag.pink{background:#e2689b}
+header.top{background:rgba(250,236,245,.72);border-bottom:1px solid rgba(255,255,255,.9)}
+.top .wrap{height:68px;max-width:1280px}
+.logo{font-family:var(--display);font-size:21px;color:#9b4f7c;gap:8px}
+.logo .mark{width:42px;height:28px}
+nav.main{margin:0 auto;gap:8px}
+nav.main a{font-size:14.5px;font-weight:500;border-radius:0;padding:8px 10px;border-bottom:2px solid transparent}
+nav.main a:hover{background:none;color:var(--pink)}
+nav.main a.on{color:var(--pink);border-bottom-color:var(--pink)}
+.hicons{display:flex;align-items:center;gap:4px}
+.ic{width:40px;height:40px;display:grid;place-items:center;border:0;background:none;border-radius:50%;color:var(--ink);text-decoration:none;position:relative}
+.ic:hover{background:rgba(255,255,255,.7)}
+.cart-btn .badge{top:0;right:0;border:2px solid #fff;min-width:20px;height:20px;font-size:11px}
+.menu-btn{display:none}
+@media (max-width:980px){nav.main{display:none;position:absolute;top:68px;left:0;right:0;flex-direction:column;background:rgba(251,240,247,.97);padding:10px 18px;border-bottom:1px solid var(--line)}nav.main.open{display:flex}.menu-btn{display:grid}.logo{font-size:17px}.hicons{margin-left:auto}}
+/* hero */
+.hero{display:block;min-height:0;position:relative;overflow:hidden;background:radial-gradient(60% 90% at 20% 30%,#fbe4f0 0%,rgba(251,228,240,0) 60%),linear-gradient(115deg,#f5d3e7 0%,#ead2f2 55%,#efd8f3 100%);border-bottom:0}
+.hero::before{display:none}
+.hero .hero-grid{position:relative;display:grid;grid-template-columns:1fr 1.25fr 270px;gap:0;align-items:center;max-width:1280px;padding-top:0!important;padding-bottom:0!important}
+.hero-text{position:relative;z-index:3;text-align:center;padding:40px 0}
+.bubble-pill{display:inline-block;border:1.5px solid rgba(255,255,255,.95);border-radius:50%;padding:14px 36px;color:#fff;font-size:18px;text-shadow:0 1px 8px rgba(200,90,150,.55);font-family:var(--display);line-height:1.4}
+.brand-title{font-family:var(--display);font-weight:700;font-size:clamp(34px,4.6vw,60px);color:#fff;letter-spacing:-1px;text-shadow:0 2px 0 rgba(222,130,175,.55),0 8px 24px rgba(205,90,150,.5);margin-top:14px;white-space:nowrap}
+.script{font-family:"Great Vibes",cursive;font-size:clamp(36px,4.4vw,58px);color:#fff;text-shadow:0 3px 16px rgba(205,90,150,.6);margin-top:-10px;transform:rotate(-4deg);white-space:nowrap}
+.tagline{color:#5e3a59;font-size:16px;margin:16px 0 18px}
+.hero-visual{position:relative;align-self:stretch;margin:0 -60px 0 -40px;z-index:1}
+.hero-visual img{width:100%;height:100%;min-height:440px;object-fit:cover;object-position:55% 25%;display:block;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 16%,#000 84%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 16%,#000 84%,transparent 100%)}
+.mood-card{padding:30px 16px 18px;text-align:center;position:relative;z-index:3;display:grid;gap:10px;margin:30px 0}
+.mood-card h3{font-size:22px;color:var(--ink);line-height:1.3}
+.mc-bow{position:absolute;top:-14px;left:50%;transform:translateX(-50%);width:62px}
+.avatars{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.avatars a{text-decoration:none;font-size:12.5px;font-weight:700;line-height:1.35;display:grid;gap:6px;color:var(--ink)}
+.avatars img{width:100%;aspect-ratio:74/96;object-fit:cover;border-radius:12px;border:2px solid #fff;box-shadow:0 6px 14px -8px rgba(200,90,150,.7)}
+.spark{position:absolute;z-index:2;color:#fff;text-shadow:0 0 10px #fff,0 0 22px #f3a3c8;font-size:24px;animation:tw 3s ease-in-out infinite;pointer-events:none}
+.petal{position:absolute;top:-30px;z-index:2;width:22px;height:15px;border-radius:70% 30% 70% 30%;background:linear-gradient(135deg,#ffd0e2,#f08cb4);opacity:.7;animation:fall linear infinite;pointer-events:none}
+@keyframes fall{from{transform:translateY(0) rotate(0)}to{transform:translateY(640px) rotate(300deg)}}
+@media (max-width:980px){
+  .hero .hero-grid{grid-template-columns:1fr}
+  .hero-visual{order:-1;margin:0 -18px}
+  .hero-visual img{min-height:0;aspect-ratio:788/517;height:auto;-webkit-mask-image:linear-gradient(180deg,#000 72%,transparent 100%);mask-image:linear-gradient(180deg,#000 72%,transparent 100%)}
+  .hero-text{margin-top:-90px;padding:0 0 10px}
+  .brand-title{font-size:clamp(30px,9vw,44px)}
+  .mood-card{margin:16px 0 30px}
+}
+/* 홈 3단 카드 */
+.home-row{padding:26px 0 10px}
+.row3{display:grid;grid-template-columns:1.05fr 1.05fr .9fr;gap:18px;max-width:1280px}
+.rc{padding:16px 18px;display:grid;gap:12px;align-content:start}
+.rc-head{display:flex;align-items:center;gap:8px;justify-content:space-between}
+.rc-head h3{font-family:var(--body);font-weight:900;font-size:18px;display:flex;gap:7px;align-items:center}
+.rc-head a{font-size:12.5px;color:var(--muted);text-decoration:none;white-space:nowrap}
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.trio .it{display:grid;gap:3px;text-decoration:none;font-size:13px;color:var(--ink);align-content:start}
+.trio img{width:100%;aspect-ratio:1/.72;object-fit:cover;border-radius:12px;background:#fbe9f1}
+.trio b{font-size:13.5px;line-height:1.35}
+.trio .h{font-size:11.5px;color:var(--muted)}
+.hot .it{background:rgba(255,255,255,.75);border-radius:14px;padding:6px 6px 10px;position:relative}
+.hot img{aspect-ratio:1/.8}
+.cartmini{position:absolute;right:6px;bottom:6px;width:30px;height:30px;border-radius:50%;border:1px solid var(--line2);background:#fff;display:grid;place-items:center;color:var(--ink)}
+.buy{position:relative;overflow:hidden;padding-right:18px}
+.buy .btn{justify-content:center;width:100%;padding:14px 12px;font-size:15px;white-space:normal}
+.npay{background:#fff;color:#03b152;font-weight:900;border-radius:5px;padding:1px 6px;font-size:13px}
+.or{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:13px}
+.or::before,.or::after{content:"";flex:1;height:1px;background:var(--line2)}
+.bunny{position:absolute;right:-10px;bottom:-14px;width:96px;border-radius:20px;opacity:.95;pointer-events:none;-webkit-mask-image:radial-gradient(closest-side,#000 70%,transparent);mask-image:radial-gradient(closest-side,#000 70%,transparent)}
+.buy .note{padding-right:80px}
+@media (max-width:980px){.row3{grid-template-columns:1fr}}
+@media (max-width:560px){.trio{gap:7px}.trio b{font-size:12.5px}}
+/* 채널 & 스트립 */
+.channel{display:grid;grid-template-columns:220px 1fr;gap:26px;align-items:center;padding:26px}
+.channel>img{width:100%;border-radius:24px}
+.series{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.series li{display:grid;background:rgba(255,255,255,.7);border-radius:14px;padding:10px 14px}
+.series span{font-size:12.5px;color:var(--muted)}
+@media (max-width:700px){.channel{grid-template-columns:1fr}.channel>img{width:140px;margin:0 auto}}
+.yt-ic{width:26px;height:18px;border-radius:5px;background:#ff0033;display:inline-grid;place-items:center}
+.strip{background:linear-gradient(90deg,#f7d7e8,#e9d8f6);padding:18px 0}
+.strip-in{display:flex;flex-wrap:wrap;align-items:center;gap:12px;justify-content:space-between;max-width:1280px}
+.strip-msg{font-family:var(--display);font-size:16px}
+.hashes{display:flex;gap:8px;flex-wrap:wrap}
+.hashes a{background:rgba(255,255,255,.8);border-radius:999px;padding:7px 14px;font-size:13px;font-weight:700;text-decoration:none;color:var(--ink)}
+.shop-search{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.85);border:1px solid var(--line2);border-radius:999px;padding:9px 16px;margin-bottom:14px;max-width:460px}
+.shop-search input{border:0;background:none;outline:none;flex:1;min-width:0}
+.card .pic{border-bottom:1px solid var(--line)}
+footer{background:#5a3554}
+.perk .ic{width:42px;height:42px;border-radius:12px;font-weight:900;font-size:14px;border:0}
+</style>
+</head>
+<body>
+
+<div class="notice" aria-label="공지"><div class="track">
+  <span>✦ 첫 구매 쿠폰 YEOJU10 · 10% 할인</span><span>✦ 50,000원 이상 무료배송</span><span>✦ 계좌이체 결제 시 2% 추가 할인</span><span>✦ 네이버 스마트스토어 구매 시 네이버페이 포인트 적립</span><span>✦ 월간 여주 박스 첫 달 무료배송</span>
+  <span>✦ 첫 구매 쿠폰 YEOJU10 · 10% 할인</span><span>✦ 50,000원 이상 무료배송</span><span>✦ 계좌이체 결제 시 2% 추가 할인</span><span>✦ 네이버 스마트스토어 구매 시 네이버페이 포인트 적립</span><span>✦ 월간 여주 박스 첫 달 무료배송</span>
+</div></div>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="여주메이크업연구소 홈">
+      <svg class="mark" viewBox="0 0 48 32" aria-hidden="true"><path d="M24 15 C16 2 2 4 4 14 C6 22 18 20 24 15Z M24 15 C32 2 46 4 44 14 C42 22 30 20 24 15Z" fill="none" stroke="#c76b9a" stroke-width="2.4" stroke-linejoin="round"/><path d="M22 16 L15 30 M26 16 L33 30" stroke="#c76b9a" stroke-width="2.4" stroke-linecap="round"/><circle cx="24" cy="15.5" r="3" fill="#e990b6"/></svg>
+      <span>여주메이크업연구소</span>
+    </a>
+    <nav class="main" id="mainNav">
+      <a href="#top" class="on">홈</a>
+      <a href="#channel">채널 소개</a>
+      <a href="#looks">메이크업 추천</a>
+      <a href="#shop">쇼핑</a>
+      <a href="#quiz">앱 진단</a>
+      <a href="#event">이벤트 <span style="color:var(--pink)">♥</span></a>
+    </nav>
+    <div class="hicons">
+      <button class="ic" id="searchBtn" aria-label="상품 검색"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4" stroke-linecap="round"/></svg></button>
+      <a class="ic" href="#admin" aria-label="운영자 페이지"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4.5 4.5-6.5 8-6.5s7 2 8 6.5" stroke-linecap="round"/></svg></a>
+      <button class="ic cart-btn" id="cartBtn" aria-label="장바구니 열기"><svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M3 4h2.5l2.2 11h10.6L20.5 7H7"/><circle cx="9.5" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/></svg><span class="badge num" id="cartCount">0</span></button>
+      <button class="ic menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mainNav" aria-label="메뉴"><svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="store">
+<!-- 히어로 -->
+<section class="hero" id="top">
+  <span class="spark" style="left:3%;top:16%">✦</span><span class="spark" style="left:30%;top:8%;font-size:16px;animation-delay:.6s">✦</span><span class="spark" style="left:44%;top:56%;font-size:14px;animation-delay:1.2s">✦</span><span class="spark" style="right:22%;top:12%;font-size:18px;animation-delay:1.8s">✦</span>
+  <span class="petal" style="left:6%;animation-duration:14s"></span><span class="petal" style="left:52%;animation-duration:18s;animation-delay:-6s"></span><span class="petal" style="right:8%;animation-duration:16s;animation-delay:-3s"></span>
+  <div class="wrap hero-grid">
+    <div class="hero-text">
+      <span class="bubble-pill">애니 여주 무드,<br>이제는 현실에서도 ♡</span>
+      <h1 class="brand-title">여주메이크업연구소</h1>
+      <div class="script" aria-hidden="true">Makeup Laboratory</div>
+      <p class="tagline">내 최애 여주 무드, 오늘 내 얼굴에서 완성 ♡</p>
+      <a class="btn ghost" href="#tryon">지금 바로 시작하기 ›</a>
+    </div>
+    <div class="hero-visual"><img src="hero.jpg" alt="리본 헤어 장식을 한 모델과 시그니처 립글로스·쿠션"></div>
+    <aside class="panel mood-card" aria-label="여주 무드 진단">
+      <svg class="mc-bow" viewBox="0 0 60 30" aria-hidden="true"><path d="M30 14 C22 2 6 4 8 13 C10 21 24 19 30 14Z M30 14 C38 2 54 4 52 13 C50 21 36 19 30 14Z" fill="#f6c6dc" stroke="#e7a0c2" stroke-width="1.5"/><circle cx="30" cy="14.5" r="3.5" fill="#efa4c6"/></svg>
+      <h3>나에게 어울리는<br>여주 무드는?</h3>
+      <p class="note" style="margin-top:-4px">지금 바로 진단해보세요!</p>
+      <div class="avatars">
+        <a href="#tryon" data-trylook="darkcool"><img src="av1.jpg" alt="냉미녀 여주 캐릭터"><span>냉미녀<br>여주</span></a>
+        <a href="#tryon" data-trylook="pure"><img src="av2.jpg" alt="햇살 여주 캐릭터"><span>햇살<br>여주</span></a>
+        <a href="#tryon" data-trylook="magical"><img src="av3.jpg" alt="청순 판타지 캐릭터"><span>청순<br>판타지</span></a>
+      </div>
+      <a class="btn pink block" href="#quiz">테스트 시작하기 ›</a>
+    </aside>
+  </div>
+</section>
+
+<section class="home-row">
+  <div class="wrap row3">
+    <div class="panel rc">
+      <div class="rc-head"><h3><svg viewBox="0 0 24 22" width="22" height="20" aria-hidden="true"><path d="M12 21 C-4 10 4-2 12 5 C20-2 28 10 12 21Z" fill="#e8749f"/></svg>BEST 무드 추천</h3><a href="#looks">더보기 ›</a></div>
+      <div class="trio">
+        <a class="it" href="#tryon" data-trylook="darkcool"><img src="eye.jpg" alt="음영 아이 메이크업 클로즈업"><b>냉미녀 여주 메이크업</b><span class="h">#맑은피부 #은은한음영</span></a>
+        <a class="it" href="#tryon" data-trylook="pure"><img src="lip.jpg" alt="코랄 글로시 립 클로즈업"><b>햇살 여주 메이크업</b><span class="h">#생기블러셔 #코랄립</span></a>
+        <a class="it" href="#tryon" data-trylook="magical"><img src="cheek.jpg" alt="핑크 홍조 볼 클로즈업"><b>청순 판타지 메이크업</b><span class="h">#물광피부 #핑크무드</span></a>
+      </div>
+    </div>
+    <div class="panel rc hot">
+      <div class="rc-head"><h3><svg viewBox="0 0 60 30" width="30" height="16" aria-hidden="true"><path d="M30 14 C22 2 6 4 8 13 C10 21 24 19 30 14Z M30 14 C38 2 54 4 52 13 C50 21 36 19 30 14Z" fill="none" stroke="#e8749f" stroke-width="3"/><path d="M28 16 L20 29 M32 16 L40 29" stroke="#e8749f" stroke-width="3" stroke-linecap="round"/></svg>지금 가장 핫한 아이템 <span style="color:#f2b84b">✦</span></h3><a href="#shop">더보기 ›</a></div>
+      <div class="trio" id="hotItems"></div>
+    </div>
+    <div class="panel rc buy">
+      <div class="rc-head"><h3><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2.5l2.2 11h10.6L20.5 7H7"/><circle cx="9.5" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/></svg>간편하게 구매하기 ♡</h3></div>
+      <a class="btn naver" id="buyNaver" href="#" target="_blank" rel="noopener"><span class="npay">N Pay</span> 네이버 스마트스토어 구매하기 ›</a>
+      <div class="or">또는</div>
+      <button class="btn" id="buyBank"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#7a5bd0" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-5 9 5H3z"/><path d="M5 10v7M9.5 10v7M14.5 10v7M19 10v7M3 20h18"/></svg> 계좌이체 결제하기 ›</button>
+      <p class="note">계좌이체 시 2% 추가 할인 · 5만원 이상 무료배송</p>
+      <img class="bunny" src="bunny.jpg" alt="">
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="event" style="padding:40px 0 10px">
+  <div class="wrap">
+    <div class="sec-head" style="margin-bottom:16px"><div><span class="eyebrow">EVENT</span><h2>진행 중인 혜택</h2></div></div>
+    <div class="perks" style="margin-top:0">
+      <div class="panel perk"><div class="ic" style="background:#ffe7a8">10%</div><div><b>첫 구매 쿠폰</b><span>코드 YEOJU10</span></div></div>
+      <div class="panel perk"><div class="ic" style="background:#cdeee3">무배</div><div><b>5만원 이상 무료배송</b><span>미만 시 3,000원</span></div></div>
+      <div class="panel perk"><div class="ic" style="background:#03c75a;color:#fff">N</div><div><b>스마트스토어 연동</b><span>네이버페이로 간편결제</span></div></div>
+      <div class="panel perk"><div class="ic" style="background:#fbdde9">2%</div><div><b>계좌이체 추가 할인</b><span>무통장 입금 시 자동 적용</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 가상 메이크업 -->
+<section class="sec" id="tryon" style="padding-bottom:20px">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="eyebrow">VIRTUAL TRY-ON</span><h2>모델에게 룩을 입혀 보세요</h2></div>
+      <p>룩을 고르면 여주메이크업연구소 모델 얼굴에 섀도·라이너·홍조·립 컬러가 입혀져요. 슬라이더를 밀어 원본과 비교해 보세요.</p>
+    </div>
+    <div class="tryon-grid">
+      <div class="panel compare">
+        <div class="cmp" id="cmp">
+          <canvas class="eyecv" id="heroAfter" data-look="magical" aria-label="룩 적용 모습"></canvas>
+          <canvas class="eyecv cmp-before" id="heroBefore" data-look="magical" data-bare="1" aria-label="원본 사진"></canvas>
+          <div class="cmp-line" id="cmpLine"></div>
+          <span class="cmp-lab l">원본</span><span class="cmp-lab r">룩 적용</span>
+        </div>
+        <input type="range" id="cmpRange" min="0" max="100" value="40" aria-label="원본과 룩 적용 비교 슬라이더">
+      </div>
+      <div class="panel" style="padding:20px;display:grid;gap:12px;align-content:start">
+        <span class="kit-title">룩 선택</span>
+        <div class="hero-looks" id="heroLooks"></div>
+        <p class="note" id="heroCap"></p>
+        <div id="heroKit"></div>
+      </div>
+    </div>
+    <p class="photo-note" style="margin-top:10px">가상 체험 이미지는 색감 참고용이에요. 실제 발색은 피부톤과 바르는 양에 따라 달라요.</p>
+  </div>
+</section>
+
+<!-- 퀴즈 -->
+<section class="sec" id="quiz">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="eyebrow">LOOK FINDER</span><h2>나에게 어울리는 여주 룩은?</h2></div>
+      <p>세 가지 질문에 답하면 분위기와 피부톤에 맞는 룩과 키트를 골라 드려요.</p>
+    </div>
+    <div class="quiz">
+      <div class="panel q" id="quizBox"></div>
+      <div class="panel result" id="quizResult">
+        <span class="qstep">진단 결과</span>
+        <h3 style="font-size:24px">질문에 답하면 여기에 추천 룩이 나와요</h3>
+        <p class="note">결과와 함께 바로 담을 수 있는 키트, 단계별 메이크업 순서를 보여 드려요.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 룩 컬렉션 -->
+<section class="sec dots" id="looks" style="border-top:2.5px solid var(--ink);border-bottom:2.5px solid var(--ink)">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="eyebrow">LOOK COLLECTION</span><h2>시그니처 여주 룩 키트</h2></div>
+      <p>룩 하나에 필요한 아이템을 한 상자에. 단품으로 사는 것보다 최대 25% 저렴하고, 단계별 튜토리얼 카드가 함께 들어 있어요.</p>
+    </div>
+    <div class="looks" id="lookGrid"></div>
+  </div>
+</section>
+
+<!-- 채널 -->
+<section class="sec" id="channel">
+  <div class="wrap">
+    <div class="panel channel">
+      <img src="bunny.jpg" alt="여주메이크업연구소 마스코트 토끼">
+      <div style="display:grid;gap:10px">
+        <span class="eyebrow">OUR CHANNEL</span>
+        <h2 style="font-size:clamp(24px,4vw,34px)">매주 새로운 여주 메이크업 튜토리얼</h2>
+        <p style="color:#6a4566">애니 속 여주인공의 무드를 현실 얼굴로 옮기는 과정을 영상으로 보여 드려요. 영상 속 제품은 모두 이 스토어에서 바로 살 수 있어요.</p>
+        <ul class="series">
+          <li><b>여주 무드 따라잡기</b><span>매주 화요일 · 룩 하나를 처음부터 끝까지</span></li>
+          <li><b>3분 데일리 여주</b><span>매주 금요일 · 출근·등교용 간단 버전</span></li>
+          <li><b>라이브 메이크업 상담</b><span>매월 첫째 주 · 구독자 고민 해결</span></li>
+        </ul>
+        <div style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn yt" href="https://www.youtube.com/@yeojulab" target="_blank" rel="noopener"><span class="yt-ic"><svg viewBox="0 0 10 10" width="9" height="9"><path d="M2 1l7 4-7 4z" fill="#fff"/></svg></span> 구독하기 ›</a><a class="btn" href="https://www.instagram.com/yeojulab" target="_blank" rel="noopener">인스타그램 ›</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 숍 -->
+<section class="sec" id="shop">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="eyebrow">SHOP</span><h2>단품 숍</h2></div>
+      <p>홈페이지 장바구니로 계좌이체 주문을 하거나, 같은 상품을 네이버 스마트스토어에서 바로 구매할 수 있어요.</p>
+    </div>
+    <div class="shop-search"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4" stroke-linecap="round"/></svg><input id="q" type="search" placeholder="상품 이름으로 검색 (예: 틴트, 쿠션)" aria-label="상품 검색"></div>
+    <div class="filters" id="filters" role="toolbar" aria-label="카테고리 필터"></div>
+    <div class="grid" id="productGrid"></div>
+  </div>
+</section>
+
+<!-- 구독 -->
+<section class="sec dots" id="box" style="border-top:2.5px solid var(--ink);border-bottom:2.5px solid var(--ink)">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="eyebrow">MONTHLY BOX</span><h2>월간 여주 박스</h2></div>
+      <p>매달 새로운 여주 룩이 상자째 도착해요. 언제든 해지할 수 있고, 매달 1일에 결제 안내를 드려요.</p>
+    </div>
+    <div class="plans" id="plans"></div>
+  </div>
+</section>
+
+<!-- 클래스 -->
+<section class="sec" id="class">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="eyebrow">MAKEUP CLASS</span><h2>여주 메이크업 클래스</h2></div>
+      <p>영상으로 혼자 배우거나, 아티스트와 1:1로, 또는 원데이 클래스에서 직접. 클래스를 고르고 날짜와 시간을 선택하세요.</p>
+    </div>
+    <div class="classes">
+      <div class="cls-list" id="clsList"></div>
+      <div class="panel booking" id="booking"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 멤버십 -->
+<section class="sec dots" id="member" style="border-top:2.5px solid var(--ink);border-bottom:2.5px solid var(--ink)">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="eyebrow">MEMBERSHIP</span><h2>여주 등급 멤버십</h2></div>
+      <p>누적 구매 금액에 따라 등급이 올라가요. 모든 구매에 적립금이 쌓이고, 다음 주문에서 현금처럼 써요.</p>
+    </div>
+    <div class="tiers">
+      <div class="panel tier"><span class="tag mint">가입 즉시</span><span class="lv">루키</span><span class="cond">회원가입</span><ul><li>구매 적립 1%</li><li>첫 구매 10% 쿠폰</li></ul></div>
+      <div class="panel tier"><span class="tag">누적 10만원</span><span class="lv">서브 여주</span><span class="cond">최근 12개월 기준</span><ul><li>구매 적립 3%</li><li>신상 미니 샘플 증정</li></ul></div>
+      <div class="panel tier" style="background:var(--blush)"><span class="tag pink">누적 30만원</span><span class="lv">메인 여주</span><span class="cond">최근 12개월 기준</span><ul><li>구매 적립 5%</li><li>금액 상관없이 무료배송</li><li>신상 선공개</li></ul></div>
+      <div class="panel tier"><span class="tag" style="background:var(--lilac)">누적 70만원</span><span class="lv">레전드</span><span class="cond">최근 12개월 기준</span><ul><li>구매 적립 7%</li><li>생일 20% 쿠폰</li><li>1:1 코칭 연 1회 무료</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- 크리에이터 -->
+<section class="sec" id="creator">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="eyebrow">CREATOR PARTNERS</span><h2>코스어·뷰티 크리에이터 파트너</h2></div>
+      <p>내 전용 할인 코드로 팔로워가 구매하면 판매 금액의 10%를 정산해 드려요. 매월 10일 지급.</p>
+    </div>
+    <div class="panel creator">
+      <div>
+        <h3 style="font-size:22px;margin-bottom:14px">예상 수익 계산기</h3>
+        <div class="calc-row"><label for="cfol">팔로워 수 <span class="num" id="cfolV"></span></label><input type="range" id="cfol" min="1000" max="200000" step="1000" value="20000"></div>
+        <div class="calc-row"><label for="cconv">코드 사용률 <span class="num" id="cconvV"></span></label><input type="range" id="cconv" min="0.1" max="3" step="0.1" value="0.8"></div>
+        <div class="calc-row"><label for="caov">평균 주문 금액 <span class="num" id="caovV"></span></label><input type="range" id="caov" min="15000" max="90000" step="1000" value="42000"></div>
+        <p class="note">팔로워 × 코드 사용률 × 평균 주문 금액 × 커미션 10%로 계산한 예시값이에요.</p>
+      </div>
+      <div style="display:grid;gap:10px;align-content:start">
+        <span class="note">한 달 예상 정산액</span>
+        <div class="big num" id="cOut">0원</div>
+        <span class="note" id="cOrders"></span>
+        <ul style="margin:0;padding-left:18px;font-size:14px">
+          <li>전용 코드 사용 고객에게 5% 할인</li>
+          <li>신상 키트 무상 제공 (월 1회)</li>
+          <li>콘텐츠 2차 활용 시 별도 원고료</li>
+        </ul>
+        <button class="btn pink" id="applyCreator">파트너 신청서 복사하기</button>
+        <span class="note">복사한 신청서를 인스타그램 DM 또는 이메일 <b class="ph">partner@yeojulab.kr</b>로 보내 주세요.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec" id="faq" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head"><div><span class="eyebrow">FAQ</span><h2>자주 묻는 질문</h2></div></div>
+    <div class="faq">
+      <details class="panel"><summary>스마트스토어 결제와 계좌이체 중 뭐가 좋아요?</summary><p>네이버페이 포인트를 쓰거나 카드 결제를 원하시면 스마트스토어, 2% 추가 할인을 원하시면 계좌이체가 유리해요. 두 경로 모두 같은 상품, 같은 배송으로 보내 드려요.</p></details>
+      <details class="panel"><summary>계좌이체 입금 기한이 있나요?</summary><p>주문 후 24시간 이내에 주문자명 또는 입력하신 입금자명으로 입금해 주세요. 기한이 지나면 주문이 자동 취소돼요. 입금 확인 후 1~2영업일 내 출고합니다.</p></details>
+      <details class="panel"><summary>민감성 피부도 쓸 수 있나요?</summary><p>모든 제품 상세에 전성분을 공개하고 있어요. 피부가 예민하다면 팔뚝 안쪽에 먼저 테스트해 보시고, 이상이 있으면 사용을 멈춰 주세요.</p></details>
+      <details class="panel"><summary>정기구독 해지는 어떻게 하나요?</summary><p>다음 결제일 3일 전까지 고객센터 또는 카카오톡 채널로 말씀해 주시면 위약금 없이 해지돼요.</p></details>
+      <details class="panel"><summary>교환·환불 기준은요?</summary><p>미개봉 상품은 수령 후 7일 이내 교환·환불이 가능해요. 개봉한 색조 제품은 위생상 단순 변심 반품이 어려우며, 제품 불량은 왕복 배송비를 저희가 부담해요.</p></details>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- 운영자: 수익구조 -->
+<main id="admin">
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><span class="eyebrow">OWNER ONLY</span><h2>수익구조 · 운영 대시보드</h2></div>
+        <a class="btn sm" href="#top">스토어로 돌아가기</a>
+      </div>
+
+      <h3 style="font-size:22px;margin-bottom:14px">6가지 수익원</h3>
+      <div class="streams" style="margin-bottom:34px">
+        <div class="panel stream"><span class="no">01</span><b>룩 키트·단품 판매</b><p>핵심 매출. 키트는 단품 대비 할인하지만 객단가를 4만원대로 끌어올리고 묶음 출고로 배송비를 아낍니다.</p></div>
+        <div class="panel stream"><span class="no">02</span><b>월간 여주 박스 (구독)</b><p>매달 반복되는 예측 가능한 매출. 신상·재고 소진 상품을 함께 구성해 원가율을 관리합니다.</p></div>
+        <div class="panel stream"><span class="no">03</span><b>메이크업 클래스</b><p>VOD는 한 번 만들면 원가가 거의 없고, 1:1·원데이 클래스는 수강 후 키트 구매로 이어집니다.</p></div>
+        <div class="panel stream"><span class="no">04</span><b>멤버십 재구매</b><p>등급별 적립과 무료배송으로 재구매를 유도해 광고비 없이 반복 매출을 만듭니다.</p></div>
+        <div class="panel stream"><span class="no">05</span><b>크리에이터 제휴</b><p>판매가 일어날 때만 10%를 지급하는 성과형 마케팅. 광고비 대신 쓰는 변동비입니다.</p></div>
+        <div class="panel stream"><span class="no">06</span><b>결제 채널 이원화</b><p>스마트스토어는 검색 유입과 신뢰도, 계좌이체는 수수료 0원. 2% 할인으로 이체를 유도해 마진을 지킵니다.</p></div>
+      </div>
+
+      <h3 style="font-size:22px;margin-bottom:14px">월 손익 시뮬레이터</h3>
+      <div class="kpis" id="kpis"></div>
+      <div class="adm-grid">
+        <div class="panel sim" id="sim"></div>
+        <div style="display:grid;gap:22px">
+          <div class="panel" style="padding:18px">
+            <h3 style="font-size:20px;margin-bottom:14px">수익원별 월 매출</h3>
+            <div class="bars" id="bars"></div>
+          </div>
+          <div class="panel" style="padding:18px">
+            <h3 style="font-size:20px;margin-bottom:8px">손익 계산서 (월)</h3>
+            <table class="pl num" id="pl"></table>
+            <p class="note" style="margin-top:10px">입력값은 모두 예시값이에요. 스마트스토어 수수료율은 스마트스토어센터의 실제 요율로 바꿔 넣으세요.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="font-size:22px;margin:40px 0 14px">주문 관리 (계좌이체 입금 확인)</h3>
+      <div class="panel" style="padding:16px">
+        <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center;margin-bottom:12px">
+          <span class="note" id="orderSummary"></span>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <button class="btn sm" id="copyCsv">주문 CSV 복사</button>
+            <button class="btn sm" id="clearOrders">테스트 주문 삭제</button>
+          </div>
+        </div>
+        <div class="tbl-wrap"><table class="orders" id="orders"></table></div>
+        <p class="note" style="margin-top:10px">이 목록은 지금 사용 중인 브라우저에 저장된 주문만 보여 줘요. 실제 운영에서는 주문 알림을 받을 서버나 구글폼·카카오 알림 연동이 필요해요.</p>
+      </div>
+
+      <h3 style="font-size:22px;margin:40px 0 14px">결제 설정</h3>
+      <div class="panel" style="padding:18px">
+        <div class="form">
+          <div class="fld full"><label for="setSS">네이버 스마트스토어 주소</label><input id="setSS" type="url"></div>
+          <div class="fld"><label for="setBank">은행명</label><input id="setBank"></div>
+          <div class="fld"><label for="setAcct">계좌번호</label><input id="setAcct"></div>
+          <div class="fld"><label for="setHolder">예금주</label><input id="setHolder"></div>
+          <div class="fld"><label for="setHours">입금 기한 (시간)</label><input id="setHours" type="number" min="1" max="168"></div>
+        </div>
+        <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap">
+          <button class="btn pink" id="saveSettings">설정 저장</button>
+          <span class="note" style="align-self:center">여기서 바꾼 값은 이 브라우저에만 저장돼요. 모든 손님에게 적용하려면 코드 맨 위 STORE 설정을 바꿔 주세요.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<section class="strip">
+  <div class="wrap strip-in">
+    <span class="strip-msg"><span style="color:var(--pink)">♥</span> 여주메이크업연구소와 함께, 더 예뻐지는 하루를 시작해요 ♡</span>
+    <div class="hashes"><a href="#tryon" data-trylook="darkcool">#냉미녀여주</a><a href="#tryon" data-trylook="magical">#몽환적인분위기</a><a href="#tryon" data-trylook="tsundere">#시크한흑발</a><a href="#looks">#애니메이크업</a></div>
+    <a class="btn yt" href="https://www.youtube.com/@yeojulab" target="_blank" rel="noopener"><span class="yt-ic"><svg viewBox="0 0 10 10" width="9" height="9"><path d="M2 1l7 4-7 4z" fill="#fff"/></svg></span> 구독하기 ›</a>
+  </div>
+</section>
+<footer>
+  <div class="wrap cols">
+    <div>
+      <h4>여주메이크업연구소</h4>
+      <p>애니 여주인공의 얼굴을 현실로 옮기는 메이크업 스토어</p>
+      <p style="margin-top:12px;line-height:1.9">
+        상호 <span class="ph">여주메이크업연구소 (사업자명 입력)</span> · 대표 <span class="ph">OOO</span><br>
+        사업자등록번호 <span class="ph">000-00-00000</span><br>
+        통신판매업신고 <span class="ph">제0000-서울OO-0000호</span><br>
+        주소 <span class="ph">사업장 주소 입력</span>
+      </p>
+    </div>
+    <div>
+      <h4>고객센터</h4>
+      <p>평일 10:00 – 17:00 (점심 12:30 – 13:30)<br>전화 <span class="ph">02-000-0000</span><br>이메일 <span class="ph">help@yeojulab.kr</span></p>
+      <p style="margin-top:10px">입금 계좌<br><b id="footAcct"></b></p>
+    </div>
+    <div>
+      <h4>바로가기</h4>
+      <p style="line-height:2"><a id="footSS" href="#" target="_blank" rel="noopener">네이버 스마트스토어</a><br><a href="#faq">교환·환불 안내</a><br><a href="#creator">크리에이터 파트너</a><br><a href="#admin">운영자 대시보드</a></p>
+    </div>
+  </div>
+</footer>
+
+<button class="btn pink fab" id="fabCart" aria-label="장바구니 열기">장바구니 <span class="num" id="fabTotal"></span></button>
+
+<!-- 장바구니 -->
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="장바구니" aria-hidden="true">
+  <div class="dr-head"><h3>장바구니</h3><button class="x" id="closeCart" aria-label="장바구니 닫기">✕</button></div>
+  <div class="dr-body" id="cartBody"></div>
+  <div class="dr-foot" id="cartFoot"></div>
+</aside>
+
+<!-- 상품 상세 -->
+<div class="modal" id="pdModal" role="dialog" aria-modal="true" aria-labelledby="pdTitle">
+  <div class="box panel">
+    <div class="m-head"><h3 id="pdTitle">상품 상세</h3><button class="x" data-close="pdModal" aria-label="닫기">✕</button></div>
+    <div class="m-body" id="pdBody"></div>
+  </div>
+</div>
+
+<!-- 결제 -->
+<div class="modal" id="coModal" role="dialog" aria-modal="true" aria-labelledby="coTitle">
+  <div class="box panel">
+    <div class="m-head"><h3 id="coTitle">주문 / 결제</h3><button class="x" data-close="coModal" aria-label="닫기">✕</button></div>
+    <div class="m-body" id="coBody"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ===== 스토어 설정: 실제 운영 전 여기 값을 바꿔 주세요 ===== */
+const STORE = {
+  smartstore: "https://smartstore.naver.com/yeojulab",  // 내 스마트스토어 주소
+  bank: "OO은행",
+  account: "000-0000-0000-00",
+  holder: "여주메이크업연구소(대표 OOO)",
+  depositHours: 24,
+  freeShip: 50000,
+  shipFee: 3000,
+  transferRate: 0.02
+};
+
+/* ===== 데이터 ===== */
+const LOOKS = [
+  {id:"magical",name:"청순 판타지 룩",mood:"물광 피부에 반짝이는 핑크·라일락 판타지 무드",colors:["#f6c9dc","#e7a3c8","#c9a7e8","#9b72cf"],steps:["라일락 섀도를 눈두덩 전체에 넓게","눈 앞머리와 애교살에 큰 입자 글리터","핑크 라이너로 눈꼬리를 둥글게 빼기","볼 중앙에 동그랗게 핑크 블러셔"],price:52000,orig:68000,tag:"BEST",
+   mk:{sh:["#eab0cf","#b98ad9"],outer:"#8d5fc4",liner:"#7a3a62",wing:[668,236],mascara:"#1b1214",glitter:["#fff4d6","#ffd3ec","#ffffff"],blush:"#f58fb6",tear:true},
+   kit:[{t:"palette",n:"라일락 드림 섀도 팔레트",s:"4색 · 6g",c:["#f6c9dc","#e7a3c8","#c9a7e8","#9b72cf"]},{t:"glitter",n:"큰 입자 글리터 젤 핑크 오팔",s:"4g",c:["#ffd9ec","#fff2c9"]},{t:"liner",n:"브러시 라이너 핑크 브라운",s:"0.5g",c:["#8a3d66"]},{t:"blush",n:"크림 블러셔 체리 홍조",s:"5g",c:["#f59bbd"]},{t:"stickers",n:"별 페이스 스티커",s:"1매",c:["#ffd6f0"]}]},
+  {id:"pure",name:"햇살 여주 룩",mood:"햇살 받은 듯한 생기 블러셔와 코랄 립",colors:["#f6dccd","#f0c0a8","#e3a089","#b97a66"],steps:["피치 베이지로 눈두덩 은은하게","눈물광 하이라이터로 애교살 촉촉하게","브라운 언더래쉬로 아래 속눈썹 그리기","코끝과 볼에 코랄 홍조"],price:44000,orig:56000,tag:"NEW",
+   mk:{sh:["#f1c4ab","#e0a08a"],outer:"#b9796a",liner:"#4a2d22",wing:null,mascara:"#2a1a14",under:true,blush:"#f79d8a",tear:true},
+   kit:[{t:"palette",n:"피치 블라썸 섀도 팔레트",s:"4색 · 6g",c:["#f6dccd","#f0c0a8","#e3a089","#b97a66"]},{t:"stick",n:"눈물광 하이라이터 스틱",s:"3g",c:["#fbe9df"]},{t:"liner",n:"언더래쉬 라이너 브라운",s:"0.5g",c:["#6b4433"]},{t:"blush",n:"크림 블러셔 코랄 홍조",s:"5g",c:["#f7a28f"]},{t:"balm",n:"글로시 립밤 피치",s:"10ml",c:["#f7b5b0"]}]},
+  {id:"tsundere",name:"츤데레 여주 룩",mood:"새침한 눈꼬리에 숨긴 붉은 홍조",colors:["#f3c3c3","#e8939b","#c9505f","#8a2a37"],steps:["로즈 섀도로 눈꼬리 쪽 음영","레드 라이너로 날렵하게 꼬리 올리기","눈 밑에서 귀 쪽으로 사선 홍조","체리 틴트를 입술 안쪽에 그라데이션"],price:46000,orig:59000,tag:"",
+   mk:{sh:["#eda4ab","#c95363"],outer:"#8e2a3a",liner:"#a8172a",wing:[708,204],mascara:"#140c0c",blush:"#f2707f"},
+   kit:[{t:"liner",n:"애니 아이라이너 레드 테일",s:"0.5g",c:["#c4202f"]},{t:"palette",n:"로즈 크러시 섀도 팔레트",s:"4색 · 6g",c:["#f3c3c3","#e8939b","#c9505f","#8a2a37"]},{t:"blush",n:"크림 블러셔 체리 홍조",s:"5g",c:["#f47c8c"]},{t:"tint",n:"젤리 틴트 첫사랑 체리",s:"4g",c:["#c8102e"]}]},
+  {id:"darkcool",name:"냉미녀 여주 룩",mood:"맑은 피부에 은은한 모브 음영, 차분한 냉미녀 무드",colors:["#c9b3d9","#8e5ea2","#5b2a5e","#2b2238"],steps:["플럼 섀도로 아이홀 깊게","블랙 라이너로 직선 꼬리","라벤더 마스카라로 끝만 포인트","셀쉐이딩 컨투어로 턱선 정리"],price:54000,orig:70000,tag:"",
+   mk:{sh:["#d2b6c6","#94708b"],outer:"#634158",liner:"#2a1a24",wing:[722,198],mascara:"#120c14",blush:"#d99aae"},
+   kit:[{t:"palette",n:"플럼 나이트 섀도 팔레트",s:"4색 · 6g",c:["#c9b3d9","#8e5ea2","#5b2a5e","#2b2238"]},{t:"liner",n:"애니 아이라이너 블랙",s:"0.5g",c:["#111111"]},{t:"mascara",n:"컬러 마스카라 라벤더",s:"7g",c:["#a58bd9"]},{t:"contour",n:"셀쉐이딩 컨투어 듀오",s:"2색 · 8g",c:["#9c7058","#f3dfd2"]}]},
+  {id:"school",name:"학원물 여주 룩",mood:"교실 창가 햇살의 베이지 브라운",colors:["#f1dccb","#ddb595","#bf8f6b","#8a5e43"],steps:["베이지 섀도 한 겹","브라운 펜슬로 점막만 채우기","볼에 넓게 살구빛 블러셔","립밤으로 입술 결 정리"],price:39000,orig:49000,tag:"입문 추천",
+   mk:{sh:["#e3bfa0","#c3926e"],outer:"#94664a",liner:"#3e281c",wing:null,mascara:"#24170f",blush:"#f2a48f"},
+   kit:[{t:"palette",n:"선샤인 베이지 섀도 팔레트",s:"4색 · 6g",c:["#f1dccb","#ddb595","#bf8f6b","#8a5e43"]},{t:"liner",n:"젤 펜슬 라이너 브라운",s:"0.3g",c:["#5a3b28"]},{t:"blush",n:"크림 블러셔 살구 홍조",s:"5g",c:["#f2a48f"]},{t:"balm",n:"글로시 립밤 누드",s:"10ml",c:["#e9a39a"]}]},
+  {id:"idol",name:"아이돌 여주 룩",mood:"엔딩 요정 컷을 위한 블루·옐로 글리터",colors:["#d5ecff","#8cc8f5","#4b8fd8","#ffe27a"],steps:["블루 섀도로 눈꼬리 쪽 포인트","옐로 글리터로 눈두덩 중앙 반짝","눈 밑에 별 스티커 2~3개","글로시 립으로 마무리"],price:58000,orig:76000,tag:"한정",
+   mk:{sh:["#a9d2f2","#4f8fd6"],outer:"#2b5fa8",liner:"#141826",wing:[684,226],mascara:"#10121a",glitter:["#fff6bf","#ffe066","#ffffff","#d6eeff"],blush:"#f78fbf",tear:true,sticker:true},
+   kit:[{t:"palette",n:"스테이지 블루 섀도 팔레트",s:"4색 · 6g",c:["#d5ecff","#8cc8f5","#4b8fd8","#ffe27a"]},{t:"glitter",n:"큰 입자 글리터 젤 골드 스타",s:"4g",c:["#fff3b8","#d8f0ff"]},{t:"stickers",n:"별 페이스 스티커",s:"1매",c:["#d6f0ff"]},{t:"tint",n:"젤리 틴트 딸기 우유",s:"4g",c:["#ff6fa8"]},{t:"mist",n:"메이크업 픽서 미스트",s:"50ml",c:["#cfe6f7"]}]}
+];
+const CATS = {all:"전체",kit:"룩 키트",eye:"아이",cheek:"치크",lip:"립",base:"베이스",deco:"데코",tool:"툴"};
+const PRODUCTS = [
+  {id:"p01",cat:"eye",t:"palette",name:"별빛 펄 아이섀도 팔레트 9색",price:32000,sale:27200,c:["#f6c9dc","#c9a7e8","#fff1c8","#f0c0a8","#c9505f","#5b2a5e","#ddb595","#8cc8f5","#f7f0ea"],tag:"BEST",opts:["핑크 매직","플럼 나이트","블루 스테이지"],desc:"한 판으로 세 가지 여주 룩을 만드는 9색 팔레트. 매트·쉬머·글리터 세 질감이 3칸씩 들어 있어요. 13.5g"},
+  {id:"p02",cat:"eye",t:"liner",name:"애니 아이라이너 레드 테일",price:14000,c:["#c4202f"],tag:"",opts:["레드","블랙","브라운","핑크"],desc:"0.1mm 붓펜 팁이라 눈꼬리를 날렵하게 빼기 쉬워요. 워터프루프. 0.5g"},
+  {id:"p03",cat:"eye",t:"liner",name:"언더래쉬 브러시 라이너",price:12000,c:["#6b4433"],tag:"NEW",opts:["브라운","소프트 블랙"],desc:"애니 캐릭터처럼 아래 속눈썹을 한 올씩 그리는 초극세 브러시. 0.5g"},
+  {id:"p04",cat:"eye",t:"stick",name:"눈물광 하이라이터 스틱",price:15000,c:["#fbe9df"],tag:"",opts:["문라이트","피치 글로우"],desc:"애교살과 눈 앞머리에 촉촉한 물광을 더하는 스틱 하이라이터. 3g"},
+  {id:"p05",cat:"eye",t:"mascara",name:"컬러 마스카라",price:17000,sale:15300,c:["#a58bd9"],tag:"",opts:["라벤더","블루","버건디"],desc:"속눈썹 끝에만 바르면 애니 일러스트 같은 컬러 포인트가 생겨요. 7g"},
+  {id:"p06",cat:"eye",t:"lashes",name:"낱눈썹 + 속눈썹 픽서 세트",price:19000,c:["#1a1210"],tag:"",opts:["내추럴","드라마틱"],desc:"길이별 낱눈썹 120가닥과 픽서 글루 세트."},
+  {id:"p07",cat:"eye",t:"glitter",name:"큰 입자 글리터 젤",price:13000,c:["#fff3b8","#ffd9ec"],tag:"",opts:["골드 스타","핑크 오팔","실버 문"],desc:"손가락으로 톡 얹으면 떨어짐 없이 고정되는 젤 글리터. 4g"},
+  {id:"p08",cat:"cheek",t:"blush",name:"멜팅 홍조 블러셔",price:18000,c:["#f47c8c"],tag:"BEST",opts:["체리 홍조","코랄 홍조","살구 홍조"],desc:"얇게 여러 번 올려도 뭉치지 않는 크림 블러셔. 사선 홍조도 자연스럽게. 5g"},
+  {id:"p09",cat:"lip",t:"tint",name:"잉크 무드 글로이 틴트",price:16000,sale:13600,c:["#c8102e"],tag:"",opts:["첫사랑 체리","딸기 우유","피치 소다"],desc:"말랑한 젤리 광택이 오래 남는 수분 틴트. 4g"},
+  {id:"p10",cat:"lip",t:"balm",name:"글로시 립 오일 마법 진주",price:13000,c:["#f5b7c6"],tag:"",opts:["진주 핑크","클리어"],desc:"펄이 은은하게 도는 립밤. 틴트 위에 덧바르면 광이 두 배. 10ml"},
+  {id:"p11",cat:"base",t:"cushion",name:"쥬시 물광 쿠션",price:34000,c:["#f1d6c2"],tag:"",opts:["17호 라이트","21호 아이보리","23호 베이지"],desc:"모공을 매끈하게 덮는 세미매트 쿠션. 15g + 리필 15g"},
+  {id:"p12",cat:"base",t:"contour",name:"셀쉐이딩 컨투어 듀오",price:22000,c:["#9c7058","#f3dfd2"],tag:"",opts:["쿨 톤","웜 톤"],desc:"그림자와 하이라이트를 한 번에. 얼굴선을 애니 일러스트처럼 또렷하게. 8g"},
+  {id:"p13",cat:"base",t:"mist",name:"메이크업 픽서 미스트",price:19000,c:["#cfe6f7"],tag:"",opts:["100ml"],desc:"글리터와 블러셔를 하루 종일 고정해 주는 픽서."},
+  {id:"p14",cat:"deco",t:"stickers",name:"반짝 별 페이스 스티커 5매",price:6000,c:["#ffd6f0"],tag:"",opts:["골드 별","홀로 하트","실버 눈물"],desc:"피부에 붙여도 자극이 적은 의료용 접착제를 쓴 페이스 스티커."},
+  {id:"p15",cat:"tool",t:"brushes",name:"여주 브러시 7종 세트",price:42000,sale:35700,c:["#e9a9bf"],tag:"",opts:["로즈 핸들"],desc:"섀도·라이너·블러셔·컨투어까지 7종. 파우치 포함."},
+  {id:"p16",cat:"tool",t:"tweezers",name:"속눈썹 집게 핀셋",price:8000,c:["#cfc6cc"],tag:"",opts:["실버"],desc:"낱눈썹을 정확하게 붙이는 곡선형 핀셋."}
+];
+LOOKS.forEach(l=>PRODUCTS.unshift({id:"k_"+l.id,cat:"kit",t:"kit",name:l.name+" 키트",price:l.orig,sale:l.price,c:l.colors,tag:l.tag,opts:["기본 구성"],desc:l.mood+". 구성: "+l.kit.map(k=>k.n).join(", ")+" + 튜토리얼 카드.",look:l.id}));
+const PLANS = [
+  {id:"sub_lite",name:"라이트",price:19900,best:false,feats:["미니 사이즈 3종","월간 룩 튜토리얼 카드","구독자 전용 10% 쿠폰"]},
+  {id:"sub_std",name:"스탠다드",price:29900,best:true,feats:["정품 2종 + 미니 3종","월간 룩 튜토리얼 영상","구독자 전용 15% 쿠폰","적립 3% 추가"]},
+  {id:"sub_pre",name:"프리미엄",price:49900,best:false,feats:["정품 4종 + 미니 3종","월 1회 라이브 클래스","신제품 선공개·우선 구매","적립 5% 추가"]}
+];
+const CLASSES = [
+  {id:"cls_vod",name:"온라인 VOD 클래스",sub:"6개 룩 × 단계별 영상 · 무제한 수강 90일",price:29000,slots:false},
+  {id:"cls_11",name:"1:1 화상 코칭 (50분)",sub:"내 얼굴형·눈매에 맞춘 룩 설계 · 녹화본 제공",price:59000,slots:true},
+  {id:"cls_day",name:"오프라인 원데이 클래스",sub:"정원 8명 · 3시간 · 키트(정가 5만원대) 포함",price:89000,slots:true}
+];
+
+/* ===== 유틸 ===== */
+const $ = s=>document.querySelector(s);
+const won = n=>Math.round(n).toLocaleString("ko-KR")+"원";
+const esc = s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const load=(k,d)=>{try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}};
+const save=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+const r10 = n=>Math.round(n/10)*10;
+let S = Object.assign({}, STORE, load("hl_settings",{}));
+let cart = load("hl_cart",[]);
+let coupon = load("hl_coupon",null);
+let orders = load("hl_orders",[]);
+function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("show");clearTimeout(toast._t);toast._t=setTimeout(()=>t.classList.remove("show"),2200)}
+async function copy(text,msg){try{await navigator.clipboard.writeText(text);toast(msg||"복사했어요")}catch(e){toast("복사가 막혀 있어요. 길게 눌러 직접 복사해 주세요")}}
+const ssLink = p=> S.smartstore.replace(/\/$/,"") + (p ? "/products/"+p : "");
+
+/* ===== 색 유틸 ===== */
+function hex2rgb(h){const n=parseInt(h.slice(1),16);return [n>>16,(n>>8)&255,n&255]}
+function mix(h,a){let [r,g,b]=hex2rgb(h);const t=a<0?0:255,p=Math.abs(a);r=Math.round(r+(t-r)*p);g=Math.round(g+(t-g)*p);b=Math.round(b+(t-b)*p);return "#"+((1<<24)|(r<<16)|(g<<8)|b).toString(16).slice(1)}
+const rgba=(h,a)=>{const [r,g,b]=hex2rgb(h);return `rgba(${r},${g},${b},${a})`};
+let UID=0;
+
+/* ===== 제품 렌더 (스튜디오 촬영 느낌의 SVG) ===== */
+function defs(i){return `<defs>
+<filter id="${i}b" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>
+<filter id="${i}s"><feTurbulence type="fractalNoise" baseFrequency="1.6" numOctaves="2" seed="${UID%13}" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1.7 -.86" result="w"/><feComposite in="w" in2="SourceGraphic" operator="in" result="sp"/><feMerge><feMergeNode in="SourceGraphic"/><feMergeNode in="sp"/></feMerge></filter>
+<filter id="${i}m"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="3" seed="3" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .5 -.18" result="d"/><feComposite in="d" in2="SourceGraphic" operator="in" result="sp"/><feMerge><feMergeNode in="SourceGraphic"/><feMergeNode in="sp"/></feMerge></filter>
+<linearGradient id="${i}bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#faf5f3"/><stop offset=".7" stop-color="#f1e7e3"/><stop offset="1" stop-color="#e9ddd8"/></linearGradient>
+<linearGradient id="${i}gl" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".4" stop-color="#fff" stop-opacity=".55"/><stop offset=".62" stop-color="#fff" stop-opacity="0"/></linearGradient>
+<linearGradient id="${i}gold" x1="0" x2="1"><stop offset="0" stop-color="#a98157"/><stop offset=".5" stop-color="#f4e0bd"/><stop offset="1" stop-color="#94693f"/></linearGradient>
+<linearGradient id="${i}silver" x1="0" x2="1"><stop offset="0" stop-color="#8e8a8f"/><stop offset=".5" stop-color="#f4f2f4"/><stop offset="1" stop-color="#7b777c"/></linearGradient>
+<linearGradient id="${i}blk" x1="0" x2="1"><stop offset="0" stop-color="#0c0a0b"/><stop offset=".3" stop-color="#3a3537"/><stop offset=".55" stop-color="#171415"/><stop offset="1" stop-color="#050405"/></linearGradient>
+<linearGradient id="${i}wht" x1="0" x2="1"><stop offset="0" stop-color="#d9d2d4"/><stop offset=".35" stop-color="#ffffff"/><stop offset=".7" stop-color="#ece6e8"/><stop offset="1" stop-color="#c9c1c4"/></linearGradient>
+<linearGradient id="${i}skin" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#f5d6c3"/><stop offset="1" stop-color="#e5b69b"/></linearGradient>
+<linearGradient id="${i}holo" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#ffd6f0"/><stop offset=".3" stop-color="#d6f0ff"/><stop offset=".6" stop-color="#fff3b0"/><stop offset="1" stop-color="#e0d6ff"/></linearGradient>
+</defs>`}
+function rg(id,c,cx=".38",cy=".32"){return `<radialGradient id="${id}" cx="${cx}" cy="${cy}" r=".8"><stop offset="0" stop-color="${mix(c,.32)}"/><stop offset=".55" stop-color="${c}"/><stop offset="1" stop-color="${mix(c,-.28)}"/></radialGradient>`}
+function lg(id,c){return `<linearGradient id="${id}" x1="0" x2="1"><stop offset="0" stop-color="${mix(c,-.3)}"/><stop offset=".35" stop-color="${mix(c,.28)}"/><stop offset=".6" stop-color="${c}"/><stop offset="1" stop-color="${mix(c,-.4)}"/></linearGradient>`}
+const sh=(i,cx,cy,rx,o=.24)=>`<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${rx*.12}" fill="#4a2a30" opacity="${o}" filter="url(#${i}b)"/>`;
+const R={
+ palette(i,c){const n=c.length,cols=n>4?3:2,rows=Math.ceil(n/cols),x0=24,y0=40,w=152,h=n>4?128:116,pad=11,gap=7,pw=(w-2*pad-(cols-1)*gap)/cols,ph=(h-2*pad-(rows-1)*gap)/rows;let o=sh(i,100,y0+h+8,84)+`<rect x="${x0}" y="${y0}" width="${w}" height="${h}" rx="12" fill="url(#${i}blk)"/><rect x="${x0+2}" y="${y0+2}" width="${w-4}" height="${h*.35}" rx="10" fill="#fff" opacity=".05"/>`;
+  c.forEach((col,k)=>{const px=x0+pad+(k%cols)*(pw+gap),py=y0+pad+Math.floor(k/cols)*(ph+gap);o+=`<defs>${rg(i+"p"+k,col)}</defs><rect x="${px}" y="${py}" width="${pw}" height="${ph}" rx="4" fill="#1d1a1b"/><rect x="${px+1.5}" y="${py+1.5}" width="${pw-3}" height="${ph-3}" rx="3" fill="url(#${i}p${k})" filter="url(#${i}${k%3===0?"m":"s"})"/><ellipse cx="${px+pw*.35}" cy="${py+ph*.3}" rx="${pw*.25}" ry="${ph*.12}" fill="#fff" opacity=".16"/>`});
+  return o+`<text x="100" y="${y0+h-3}" text-anchor="middle" font-size="5.5" letter-spacing="1.5" fill="#bfa98c" font-family="sans-serif">YEOJU LAB</text>`},
+ liner(i,c){const col=c[0];return `<rect x="16" y="120" width="104" height="58" rx="10" fill="url(#${i}skin)"/><path d="M28 156 Q66 136 112 136" stroke="${col}" stroke-width="5" fill="none" stroke-linecap="round" opacity=".92"/><path d="M28 156 Q60 148 80 152" stroke="${col}" stroke-width="1.6" fill="none" stroke-linecap="round" opacity=".7"/>`+sh(i,120,168,62,.2)+`<g transform="rotate(36 118 86)"><rect x="108" y="4" width="20" height="104" rx="4" fill="url(#${i}blk)"/><rect x="112" y="7" width="3" height="98" rx="1.5" fill="#fff" opacity=".28"/><rect x="108" y="96" width="20" height="7" fill="url(#${i}gold)"/><path d="M111 103 L125 103 L121 126 Q118 134 115 126 Z" fill="${mix(col,-.25)}"/><path d="M114 108 L116 124" stroke="#fff" stroke-width="1" opacity=".3"/><text x="118" y="60" transform="rotate(-90 118 60)" text-anchor="middle" font-size="5" fill="#cbb79a" font-family="sans-serif" letter-spacing="1">ANIME LINER</text></g>`},
+ mascara(i,c){const col=c[0];return `<defs>${lg(i+"t",col)}</defs>`+sh(i,100,176,70)+`<g transform="rotate(-28 100 100)"><rect x="66" y="18" width="30" height="58" rx="6" fill="url(#${i}blk)"/><rect x="66" y="76" width="30" height="92" rx="8" fill="url(#${i}t)"/><rect x="71" y="80" width="4" height="84" rx="2" fill="#fff" opacity=".35"/><text x="81" y="124" transform="rotate(-90 81 124)" text-anchor="middle" font-size="6" fill="#fff" font-family="sans-serif" letter-spacing="1.5">COLOR LASH</text></g><g transform="rotate(-28 140 110)"><rect x="136" y="20" width="8" height="70" rx="3" fill="url(#${i}silver)"/><rect x="133" y="88" width="14" height="44" rx="6" fill="#1a1414"/>${Array.from({length:14},(_,k)=>`<line x1="132" y1="${91+k*3}" x2="148" y2="${91+k*3}" stroke="${mix(col,-.1)}" stroke-width="1.4" stroke-linecap="round"/>`).join("")}</g>`},
+ stick(i,c){const col=c[0];return `<defs>${rg(i+"c",col,".3",".3")}</defs>`+sh(i,100,176,46)+`<rect x="74" y="88" width="52" height="86" rx="6" fill="url(#${i}wht)"/><rect x="74" y="88" width="52" height="8" fill="url(#${i}gold)"/><path d="M80 88 L80 52 Q80 36 100 30 L120 40 L120 88 Z" fill="url(#${i}c)" filter="url(#${i}s)"/><path d="M86 84 L86 54 Q88 44 98 40" stroke="#fff" stroke-width="3" fill="none" opacity=".55" stroke-linecap="round"/><text x="100" y="140" text-anchor="middle" font-size="6" fill="#a99" font-family="sans-serif" letter-spacing="1">TEAR GLOW</text>`},
+ glitter(i,c){return sh(i,100,176,56)+`<rect x="54" y="52" width="92" height="24" rx="6" fill="url(#${i}blk)"/><rect x="58" y="74" width="84" height="98" rx="12" fill="${c[0]}" opacity=".96" filter="url(#${i}s)"/>${Array.from({length:40},(_,k)=>{const r=Math.sin(k*91.7)*.5+.5,q=Math.sin(k*47.3)*.5+.5;return `<circle cx="${64+r*72}" cy="${80+q*86}" r="${.8+((k*7)%5)*.45}" fill="${k%2?c[1]:"#fff"}" opacity=".9"/>`}).join("")}<rect x="58" y="74" width="84" height="98" rx="12" fill="url(#${i}gl)"/><rect x="58" y="112" width="84" height="26" fill="#fff" opacity=".8"/><text x="100" y="128" text-anchor="middle" font-size="7" fill="#7a6a70" font-family="sans-serif" letter-spacing="1.5">GLITTER GEL</text>`},
+ blush(i,c){const col=c[0];return `<defs>${rg(i+"c",col)}<radialGradient id="${i}case" cx=".4" cy=".35" r=".8"><stop offset="0" stop-color="#fbf3f2"/><stop offset="1" stop-color="#d9c4c2"/></radialGradient></defs>`+sh(i,100,176,70)+`<circle cx="100" cy="100" r="70" fill="url(#${i}case)"/><circle cx="100" cy="100" r="62" fill="none" stroke="url(#${i}gold)" stroke-width="2.5"/><circle cx="100" cy="100" r="54" fill="url(#${i}c)" filter="url(#${i}m)"/>${[16,28,40].map(r=>`<circle cx="100" cy="100" r="${r}" fill="none" stroke="${mix(col,.3)}" stroke-width="2" opacity=".55"/>`).join("")}<ellipse cx="82" cy="80" rx="22" ry="10" fill="#fff" opacity=".2"/>`},
+ tint(i,c){const col=c[0];return `<defs><linearGradient id="${i}t" x1="0" x2="1"><stop offset="0" stop-color="${mix(col,-.35)}"/><stop offset=".4" stop-color="${mix(col,.15)}"/><stop offset="1" stop-color="${mix(col,-.25)}"/></linearGradient></defs><rect x="14" y="124" width="98" height="54" rx="10" fill="url(#${i}skin)"/><path d="M26 152 Q60 136 100 148 Q64 162 26 152Z" fill="${col}" opacity=".85"/><path d="M38 148 Q60 142 84 146" stroke="#fff" stroke-width="2" opacity=".55" fill="none" stroke-linecap="round"/>`+sh(i,128,176,40)+`<rect x="114" y="18" width="30" height="62" rx="6" fill="url(#${i}blk)"/><rect x="110" y="78" width="38" height="96" rx="9" fill="url(#${i}t)" opacity=".95"/><rect x="110" y="78" width="38" height="96" rx="9" fill="url(#${i}gl)"/><rect x="116" y="84" width="4" height="84" rx="2" fill="#fff" opacity=".4"/><text x="129" y="140" transform="rotate(-90 129 140)" text-anchor="middle" font-size="6" fill="#fff" font-family="sans-serif" letter-spacing="1.2">JELLY TINT</text>`},
+ balm(i,c){const col=c[0];return `<defs>${lg(i+"t",mix(col,.25))}</defs>`+sh(i,100,170,74)+`<g transform="rotate(-24 100 100)"><path d="M60 26 L140 26 L134 132 L66 132 Z" fill="url(#${i}t)"/><rect x="56" y="18" width="88" height="10" rx="2" fill="${mix(col,.1)}"/>${Array.from({length:10},(_,k)=>`<line x1="${60+k*9}" y1="19" x2="${60+k*9}" y2="27" stroke="${mix(col,-.2)}" stroke-width="1"/>`).join("")}<rect x="70" y="130" width="60" height="40" rx="5" fill="url(#${i}wht)"/><rect x="72" y="36" width="5" height="90" rx="2.5" fill="#fff" opacity=".45"/><text x="100" y="86" text-anchor="middle" font-size="7.5" fill="#fff" font-family="sans-serif" letter-spacing="1.5">GLOSSY BALM</text></g>`},
+ cushion(i,c){const col=c[0];return `<defs><radialGradient id="${i}c" cx=".4" cy=".35" r=".8"><stop offset="0" stop-color="${mix(col,.25)}"/><stop offset="1" stop-color="${mix(col,-.12)}"/></radialGradient><pattern id="${i}mesh" width="4" height="4" patternUnits="userSpaceOnUse"><path d="M0 0 L4 4 M4 0 L0 4" stroke="#fff" stroke-width=".5" opacity=".35"/></pattern></defs>`+sh(i,96,176,74)+`<circle cx="92" cy="104" r="68" fill="url(#${i}wht)"/><circle cx="92" cy="104" r="56" fill="url(#${i}c)"/><circle cx="92" cy="104" r="56" fill="url(#${i}mesh)"/><ellipse cx="146" cy="150" rx="40" ry="22" fill="#f6eeea" stroke="#e5d8d2"/><ellipse cx="146" cy="146" rx="36" ry="18" fill="#fbf7f5"/><path d="M118 146 Q146 132 174 146" stroke="#d8c8c2" stroke-dasharray="2 2" fill="none"/>`},
+ contour(i,c){return `<defs>${rg(i+"a",c[0])}${rg(i+"b2",c[1])}</defs>`+sh(i,100,160,82)+`<rect x="22" y="50" width="156" height="104" rx="14" fill="url(#${i}blk)"/><rect x="34" y="62" width="62" height="80" rx="6" fill="url(#${i}a)" filter="url(#${i}m)"/><rect x="104" y="62" width="62" height="80" rx="6" fill="url(#${i}b2)" filter="url(#${i}s)"/><ellipse cx="60" cy="80" rx="16" ry="6" fill="#fff" opacity=".14"/>`},
+ mist(i,c){const col=c[0];return sh(i,100,178,46)+`<rect x="88" y="14" width="24" height="14" rx="3" fill="url(#${i}wht)"/><rect x="82" y="26" width="36" height="22" rx="4" fill="url(#${i}silver)"/><rect x="70" y="48" width="60" height="128" rx="16" fill="${col}" opacity=".75"/><rect x="70" y="48" width="60" height="128" rx="16" fill="url(#${i}gl)"/><rect x="78" y="96" width="44" height="40" rx="3" fill="#fff" opacity=".9"/><text x="100" y="114" text-anchor="middle" font-size="7" fill="#6d6670" font-family="sans-serif" letter-spacing="1">FIX</text><text x="100" y="126" text-anchor="middle" font-size="7" fill="#6d6670" font-family="sans-serif" letter-spacing="1">MIST</text>`},
+ stickers(i,c){const star=(x,y,r,rot)=>{let p="";for(let k=0;k<10;k++){const a=Math.PI/5*k-Math.PI/2+rot,rr=k%2?r*.45:r;p+=(k?"L":"M")+(x+Math.cos(a)*rr).toFixed(1)+" "+(y+Math.sin(a)*rr).toFixed(1)}return `<path d="${p}Z" fill="url(#${i}holo)" stroke="#fff" stroke-width="1.2"/>`};return sh(i,100,176,72)+`<rect x="30" y="26" width="140" height="148" rx="8" fill="#fff"/><rect x="30" y="26" width="140" height="148" rx="8" fill="none" stroke="#e8dde0"/>`+star(70,66,20,0)+star(128,62,13,.3)+star(98,108,26,.1)+star(58,138,12,.5)+star(138,132,17,.2)+`<circle cx="140" cy="96" r="5" fill="url(#${i}holo)" stroke="#fff"/><circle cx="56" cy="102" r="4" fill="url(#${i}holo)" stroke="#fff"/>`},
+ brushes(i,c){const col=c[0];return `<defs>${lg(i+"h",col)}<linearGradient id="${i}br" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f1e2d6"/><stop offset=".55" stop-color="#7a5a4a"/><stop offset="1" stop-color="#2e2220"/></linearGradient></defs>`+sh(i,100,182,70)+[-22,0,22].map((r,k)=>`<g transform="rotate(${r} 100 186)"><path d="M${92+k} ${36-k*6} Q100 ${6-k*6} ${108-k} ${36-k*6} L${106} 62 L94 62 Z" fill="url(#${i}br)"/><rect x="92" y="60" width="16" height="22" rx="2" fill="url(#${i}gold)"/><path d="M93 82 L107 82 L104 182 L96 182 Z" fill="url(#${i}h)"/></g>`).join("")},
+ lashes(i,c){let o=sh(i,100,170,72)+`<rect x="28" y="40" width="144" height="124" rx="10" fill="#fff"/><rect x="28" y="40" width="144" height="124" rx="10" fill="none" stroke="#e8dde0"/>`;[[100,82],[100,132]].forEach(([cx,cy])=>{o+=`<path d="M48 ${cy} Q100 ${cy-22} 152 ${cy}" stroke="#1a1210" stroke-width="2.4" fill="none"/>`;for(let k=0;k<44;k++){const t=k/43,x=48+t*104,y=cy-22*4*t*(1-t)*.5*2,l=10+ t*14+(k%3)*2;o+=`<path d="M${x.toFixed(1)} ${y.toFixed(1)} q${(2+t*6).toFixed(1)} ${(-l*.6).toFixed(1)} ${(4+t*10).toFixed(1)} ${(-l).toFixed(1)}" stroke="#1a1210" stroke-width=".9" fill="none" opacity=".85"/>`}});return o},
+ tweezers(i){return sh(i,100,170,60)+`<g transform="rotate(-30 100 100)"><path d="M96 20 L92 150 Q94 168 100 172" stroke="url(#${i}silver)" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M104 20 L112 150 Q108 168 100 172" stroke="url(#${i}silver)" stroke-width="7" fill="none" stroke-linecap="round"/><rect x="92" y="14" width="16" height="12" rx="3" fill="#e9a9bf"/></g>`},
+ box(i,c){return `<defs><linearGradient id="${i}bx" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#f7d3dd"/><stop offset="1" stop-color="#e3a2b6"/></linearGradient></defs>`+sh(i,100,176,76)+`<rect x="30" y="72" width="140" height="100" rx="6" fill="url(#${i}bx)"/><rect x="24" y="56" width="152" height="26" rx="5" fill="#f2c2cf"/><rect x="92" y="56" width="16" height="116" fill="#fff" opacity=".9"/><path d="M100 56 C80 24 56 40 96 56 M100 56 C120 24 144 40 104 56" fill="#fff" stroke="#ead6dc"/><text x="100" y="134" text-anchor="middle" font-size="8" fill="#fff" font-family="sans-serif" letter-spacing="1.5">MONTHLY BOX</text>`},
+ ticket(i,c){return sh(i,100,160,74)+`<path d="M24 60 H176 V90 A10 10 0 0 0 176 110 V140 H24 V110 A10 10 0 0 0 24 90Z" fill="#fff" stroke="#ead6dc"/><line x1="130" y1="64" x2="130" y2="136" stroke="#e2c9d1" stroke-dasharray="3 3"/><text x="76" y="96" text-anchor="middle" font-size="10" fill="#e2457d" font-family="sans-serif" font-weight="700">CLASS</text><text x="76" y="114" text-anchor="middle" font-size="7" fill="#8a7a80" font-family="sans-serif">YEOJU LAB</text>`}
+};
+function prodInner(t,c,noBg){const i="u"+(++UID);const extra=`<defs><radialGradient id="${i}vig" cx=".5" cy=".35" r=".8"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset=".6" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#7a5a60" stop-opacity=".16"/></radialGradient><linearGradient id="${i}fl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient><mask id="${i}mk"><rect x="0" y="176" width="200" height="40" fill="url(#${i}fl)"/></mask><filter id="${i}gr"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" seed="7"/><feColorMatrix type="matrix" values="0 0 0 0 .4 0 0 0 0 .3 0 0 0 0 .3 0 0 0 .22 0"/></filter></defs>`;
+  const body=(R[t]||R.box)(i,c||["#f4b6c8"]);
+  if(noBg)return defs(i)+body;
+  return defs(i)+extra+`<rect width="200" height="200" fill="url(#${i}bg)"/><rect y="168" width="200" height="32" fill="#e3d4cf" opacity=".35"/><g id="${i}it">${body}</g><g mask="url(#${i}mk)"><use href="#${i}it" transform="translate(0 352) scale(1 -1)" opacity=".18"/></g><rect width="200" height="200" fill="url(#${i}vig)"/><rect width="200" height="200" filter="url(#${i}gr)"/>`}
+const PHOTO={p11:"cushion.jpg",p09:"tint.jpg",p08:"blush.jpg",p10:"gloss.jpg"};
+function pic(p){return PHOTO[p.id]?`<img src="${PHOTO[p.id]}" alt="${esc(p.name)} 제품 사진" style="width:100%;height:100%;object-fit:cover;display:block">`:prodSVG(p.t,p.c,p.look)}
+function renderHot(){$("#hotItems").innerHTML=["p11","p09","p08"].map(id=>{const p=PRODUCTS.find(x=>x.id===id);return `<div class="it" data-pd="${p.id}" tabindex="0" style="cursor:pointer"><img src="${PHOTO[id]}" alt="${esc(p.name)}"><span class="h">${CATS[p.cat]}</span><b>${esc(p.name)}</b><span class="num" style="font-weight:900">${won(unit(p))}</span><button class="cartmini" data-add="${p.id}" aria-label="${esc(p.name)} 담기"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="M3 4h2.5l2.2 11h10.6L20.5 7H7"/><circle cx="9.5" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/></svg></button></div>`}).join("")}
+function prodSVG(t,c,look){if(t==="kit"&&look)return flatlay(LOOKS.find(l=>l.id===look),true);return `<svg viewBox="0 0 200 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true">${prodInner(t,c)}</svg>`}
+function flatlay(l,square){
+  const i="u"+(++UID),n=l.kit.length;
+  const W=square?400:400,H=square?400:250;
+  const slotsW=[[0,10,170],[150,0,140],[268,30,132],[28,110,150],[200,112,150]];
+  const slotsS=[[10,30,190],[200,30,180],[0,200,170],[140,200,150],[260,190,140]];
+  const slots=square?slotsS:slotsW;
+  let o=`<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="${i}fb" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fbf6f4"/><stop offset="1" stop-color="#eee2de"/></linearGradient></defs><rect width="${W}" height="${H}" fill="url(#${i}fb)"/><filter id="${i}mb"><feTurbulence type="fractalNoise" baseFrequency=".006 .03" numOctaves="4" seed="4"/><feColorMatrix type="matrix" values="0 0 0 0 .55 0 0 0 0 .5 0 0 0 0 .52 0 0 0 -1.6 1.05"/></filter><rect width="${W}" height="${H}" filter="url(#${i}mb)" opacity=".35"/><filter id="${i}g2"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2"/><feColorMatrix type="matrix" values="0 0 0 0 .4 0 0 0 0 .3 0 0 0 0 .3 0 0 0 .18 0"/></filter>`;
+  l.kit.slice(0,5).forEach((k,j)=>{const [x,y,s]=slots[j];o+=`<svg x="${x}" y="${y}" width="${s}" height="${s}" viewBox="20 20 160 160">${prodInner(k.t,k.c,true)}</svg>`});
+  o+=`<rect width="${W}" height="${H}" filter="url(#${i}g2)"/>`;if(!square)l.kit.slice(0,5).forEach((k,j)=>{const [x,y]=slots[j];o+=`<circle cx="${x+16}" cy="${y+18}" r="10" fill="#2b1e2a"/><text x="${x+16}" y="${y+22}" text-anchor="middle" font-size="11" fill="#fff" font-family="sans-serif" font-weight="700">${j+1}</text>`});
+  return o+"</svg>";
+}
+function kitList(l){return `<ul class="kit-list">${l.kit.map((k,j)=>`<li><span class="n">${j+1}</span><span class="d" style="background:${k.c[0]}"></span><span>${esc(k.n)}</span><span class="s">${esc(k.s)}</span></li>`).join("")}<li><span class="n">+</span><span>단계별 튜토리얼 카드</span><span class="s">1매</span></li></ul>`}
+
+/* ===== 실사풍 눈 렌더 (Canvas) ===== */
+const UP=[[205,292],[282,176],[527,148],[630,258]];
+const LO=[[630,258],[550,344],[300,354],[205,292]];
+const CR=[[210,258],[285,134],[548,104],[652,226]];
+function bez(P,t){const m=1-t;return [m*m*m*P[0][0]+3*m*m*t*P[1][0]+3*m*t*t*P[2][0]+t*t*t*P[3][0],m*m*m*P[0][1]+3*m*m*t*P[1][1]+3*m*t*t*P[2][1]+t*t*t*P[3][1]]}
+function bezT(P,t){const m=1-t;const dx=3*m*m*(P[1][0]-P[0][0])+6*m*t*(P[2][0]-P[1][0])+3*t*t*(P[3][0]-P[2][0]),dy=3*m*m*(P[1][1]-P[0][1])+6*m*t*(P[2][1]-P[1][1])+3*t*t*(P[3][1]-P[2][1]);const L=Math.hypot(dx,dy)||1;return [dx/L,dy/L]}
+function rng(s){return()=>{s|=0;s=s+0x6D2B79F5|0;let t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function blob(x,cx,cy,rx,ry,col,a,rot){x.save();x.translate(cx,cy);x.rotate(rot||0);x.scale(rx/ry,1);const g=x.createRadialGradient(0,0,0,0,0,ry);g.addColorStop(0,rgba(col,a));g.addColorStop(.55,rgba(col,a*.55));g.addColorStop(1,rgba(col,0));x.fillStyle=g;x.beginPath();x.arc(0,0,ry,0,7);x.fill();x.restore()}
+function eyePath(x){x.beginPath();x.moveTo(UP[0][0],UP[0][1]);x.bezierCurveTo(UP[1][0],UP[1][1],UP[2][0],UP[2][1],UP[3][0],UP[3][1]);x.bezierCurveTo(LO[1][0],LO[1][1],LO[2][0],LO[2][1],LO[3][0],LO[3][1]);x.closePath()}
+function vstroke(x,P,t0,t1,wf,col,N=48){x.strokeStyle=col;x.lineCap="round";for(let k=0;k<N;k++){const a=t0+(t1-t0)*k/N,b=t0+(t1-t0)*(k+1)/N,p=bez(P,a),q=bez(P,b);x.lineWidth=wf((a+b)/2);x.beginPath();x.moveTo(p[0],p[1]);x.lineTo(q[0],q[1]);x.stroke()}}
+function hair(x,bx,by,nx,ny,tx,ty,len,curl,w,col){const c1x=bx+nx*len*.6+tx*len*curl*.25,c1y=by+ny*len*.6+ty*len*curl*.25,ex=bx+nx*len*.8+tx*len*curl,ey=by+ny*len*.8+ty*len*curl-len*.22*curl;x.strokeStyle=col;x.lineCap="round";const N=7;let px=bx,py=by;for(let k=1;k<=N;k++){const s=k/N,m=1-s,qx=m*m*bx+2*m*s*c1x+s*s*ex,qy=m*m*by+2*m*s*c1y+s*s*ey;x.lineWidth=Math.max(.35,w*(1-(s-.5/N)*.9));x.beginPath();x.moveTo(px,py);x.lineTo(qx,qy);x.stroke();px=qx;py=qy}}
+function drawEye(cv,L,bare){
+  const W=800,H=500;cv.width=W;cv.height=H;const x=cv.getContext("2d");const r=rng(11);const M=(L&&L.mk)||{};
+  const skin="#eec4aa";x.fillStyle=skin;x.fillRect(0,0,W,H);
+  let g=x.createLinearGradient(0,0,0,H);g.addColorStop(0,"rgba(255,236,226,.35)");g.addColorStop(.45,"rgba(255,236,226,0)");g.addColorStop(1,"rgba(170,100,80,.18)");x.fillStyle=g;x.fillRect(0,0,W,H);
+  g=x.createRadialGradient(430,260,120,430,260,560);g.addColorStop(0,"rgba(0,0,0,0)");g.addColorStop(1,"rgba(120,60,45,.35)");x.fillStyle=g;x.fillRect(0,0,W,H);
+  x.globalCompositeOperation="multiply";
+  blob(x,420,262,300,120,"#c98a72",.35,-.05);           // 눈두덩 음영
+  blob(x,250,250,90,80,"#b77a68",.35,0);                 // 눈 앞머리 쪽 깊이
+  blob(x,430,385,250,40,"#c08470",.22,-.03);             // 눈 밑 음영
+  x.globalCompositeOperation="source-over";
+  blob(x,470,120,260,46,"#fff2ea",.45,-.12);            // 브로우뼈 하이라이트
+  blob(x,430,425,220,46,"#fff0e6",.35,-.05);            // 광대 위 하이라이트
+  if(!bare&&M.blush){x.globalCompositeOperation="multiply";blob(x,600,470,230,80,M.blush,.55,-.25);x.globalCompositeOperation="source-over"}
+  // 눈썹
+  const BR=[[160,150],[400,40],[660,108]];const bq=t=>{const m=1-t;return [m*m*BR[0][0]+2*m*t*BR[1][0]+t*t*BR[2][0],m*m*BR[0][1]+2*m*t*BR[1][1]+t*t*BR[2][1]]};
+  for(let k=0;k<40;k++){const t=k/39,p=bq(t);blob(x,p[0],p[1]+4,40,16*(1-t*.6),"#7a5440",.12,-.25+t*.5)}
+  for(let k=0;k<420;k++){const t=Math.pow(r(),.85),p=bq(t),q=bq(Math.min(1,t+.01)),tx=(q[0]-p[0]),ty=(q[1]-p[1]),tl=Math.hypot(tx,ty)||1,ux=tx/tl,uy=ty/tl,th=30*(1-t*.75),off=(r()-.5)*th,bx=p[0]+uy*off*-1,by=p[1]+ux*off;const up=t<.18?.9:.3,dx=ux+0*up,dy=uy-up,dl=Math.hypot(dx,dy);x.globalAlpha=.35+r()*.45;x.strokeStyle=r()<.5?"#3e2a20":"#5c3f2f";x.lineWidth=1+r()*.9;x.beginPath();x.moveTo(bx,by);const len=12+r()*12;x.quadraticCurveTo(bx+dx/dl*len*.5,by+dy/dl*len*.5-2,bx+dx/dl*len,by+dy/dl*len+r()*3);x.stroke()}
+  x.globalAlpha=1;
+  // 섀도
+  if(!bare&&M.sh){x.globalCompositeOperation="multiply";
+    for(let k=0;k<=40;k++){const t=k/40,p=bez(UP,t),q=bez(CR,t),mx=(p[0]+q[0])/2,my=(p[1]+q[1])/2-4,d=Math.hypot(p[0]-q[0],p[1]-q[1]);const c=t<.5?M.sh[0]:M.sh[1];blob(x,mx,my,58,d*.62+18,c,.24,0)}
+    for(let k=0;k<=16;k++){const t=.62+k/16*.38,p=bez(UP,t),q=bez(CR,t);blob(x,p[0]*.65+q[0]*.35+12,p[1]*.65+q[1]*.35,46,38,M.outer,.2,-.4)}
+    for(let k=0;k<=14;k++){const t=k/14*.55,p=bez(LO,t);blob(x,p[0],p[1]+12,34,16,M.sh[1],.16,0)}
+    x.globalCompositeOperation="source-over"}
+  // 쌍꺼풀 라인 & 눈두덩 결
+  vstroke(x,CR,.05,.95,t=>6*Math.sin(Math.PI*t)+1,"rgba(120,62,48,.07)");
+  vstroke(x,CR,.12,.9,t=>2.2*Math.sin(Math.PI*t)+.5,"rgba(110,55,42,.22)");
+  // 애교살 볼륨
+  for(let k=0;k<=20;k++){const t=.1+k/20*.75,p=bez(LO,t);blob(x,p[0],p[1]+22,40,14,"#ffeee6",.22,0)}
+  vstroke(x,LO,.12,.85,t=>2*Math.sin(Math.PI*t),"rgba(150,85,70,.14)");
+  for(let k=0;k<3;k++){x.strokeStyle="rgba(150,90,70,.08)";x.lineWidth=1.2;x.beginPath();x.moveTo(330+k*40,392+k*6);x.quadraticCurveTo(420,410+k*6,520-k*20,388+k*4);x.stroke()}
+  // 안구
+  x.save();eyePath(x);x.clip();
+  g=x.createRadialGradient(410,262,40,410,262,260);g.addColorStop(0,"#fbf8f5");g.addColorStop(.55,"#efe5df");g.addColorStop(1,"#c8a197");x.fillStyle=g;x.fillRect(150,120,520,260);
+  blob(x,222,292,36,22,"#d97f7e",.9,0);blob(x,222,292,18,12,"#e9a3a0",.9,0);
+  x.strokeStyle="rgba(200,80,80,.14)";x.lineWidth=.9;for(let k=0;k<8;k++){const sx=k<4?235:600,sy=270+r()*40;x.beginPath();x.moveTo(sx,sy);x.quadraticCurveTo(sx+(k<4?40:-40),sy+(r()-.5)*30,sx+(k<4?80:-70)*r(),sy+(r()-.5)*40);x.stroke()}
+  const ix=414,iy=256,ir=86,ic="#5a3520";
+  g=x.createRadialGradient(ix,iy,6,ix,iy,ir);g.addColorStop(0,"#2a170d");g.addColorStop(.38,mix(ic,.18));g.addColorStop(.7,ic);g.addColorStop(.92,mix(ic,-.45));g.addColorStop(1,"#1a0e08");x.fillStyle=g;x.beginPath();x.arc(ix,iy,ir,0,7);x.fill();
+  for(let k=0;k<420;k++){const a=r()*Math.PI*2,r0=ir*(.33+r()*.1),r1=ir*(.7+r()*.28),lt=r()<.55;x.strokeStyle=lt?`rgba(${190+r()*40|0},${130+r()*40|0},${80+r()*30|0},${.1+r()*.16})`:`rgba(30,15,8,${.12+r()*.18})`;x.lineWidth=.7+r()*1.1;x.beginPath();x.moveTo(ix+Math.cos(a)*r0,iy+Math.sin(a)*r0);const a2=a+(r()-.5)*.12;x.quadraticCurveTo(ix+Math.cos(a2)*(r0+r1)/2,iy+Math.sin(a2)*(r0+r1)/2,ix+Math.cos(a)*r1,iy+Math.sin(a)*r1);x.stroke()}
+  x.strokeStyle="rgba(214,160,100,.28)";x.lineWidth=2.5;x.beginPath();for(let k=0;k<=60;k++){const a=k/60*Math.PI*2,rr=ir*.42+Math.sin(a*9)*3;k?x.lineTo(ix+Math.cos(a)*rr,iy+Math.sin(a)*rr):x.moveTo(ix+Math.cos(a)*rr,iy+Math.sin(a)*rr)}x.stroke();
+  g=x.createRadialGradient(ix,iy+40,10,ix,iy+30,ir);g.addColorStop(0,"rgba(230,170,110,.35)");g.addColorStop(1,"rgba(230,170,110,0)");x.fillStyle=g;x.beginPath();x.arc(ix,iy,ir,0,7);x.fill();
+  x.strokeStyle="rgba(15,8,5,.55)";x.lineWidth=7;x.beginPath();x.arc(ix,iy,ir-3,0,7);x.stroke();
+  g=x.createRadialGradient(ix,iy,0,ix,iy,34);g.addColorStop(0,"#020101");g.addColorStop(.82,"#060302");g.addColorStop(1,"rgba(6,3,2,0)");x.fillStyle=g;x.beginPath();x.arc(ix,iy,34,0,7);x.fill();
+  g=x.createLinearGradient(0,150,0,265);g.addColorStop(0,"rgba(50,22,16,.75)");g.addColorStop(.6,"rgba(50,22,16,.18)");g.addColorStop(1,"rgba(50,22,16,0)");x.fillStyle=g;x.fillRect(150,120,520,160);
+  g=x.createLinearGradient(0,355,0,315);g.addColorStop(0,"rgba(80,40,30,.3)");g.addColorStop(1,"rgba(80,40,30,0)");x.fillStyle=g;x.fillRect(150,300,520,60);
+  // 캐치라이트
+  x.save();x.translate(386,222);x.rotate(-.35);g=x.createRadialGradient(0,0,0,0,0,26);g.addColorStop(0,"rgba(255,255,255,1)");g.addColorStop(.6,"rgba(255,255,255,.95)");g.addColorStop(1,"rgba(255,255,255,0)");x.fillStyle=g;x.scale(1.3,1);x.beginPath();x.arc(0,0,26,0,7);x.fill();x.restore();
+  blob(x,452,292,10,10,"#ffffff",.85,0);
+  x.fillStyle="rgba(255,255,255,.08)";x.beginPath();x.ellipse(470,250,90,30,-.4,0,7);x.fill();
+  x.restore();
+  // 눈꺼풀 테두리
+  vstroke(x,UP,0,1,t=>3+3*Math.sin(Math.PI*t),"rgba(40,22,18,.85)");
+  vstroke(x,UP,.05,.98,t=>7*Math.sin(Math.PI*t),"rgba(110,55,45,.12)");
+  vstroke(x,LO,.03,.97,t=>3.2*Math.sin(Math.PI*t)+.5,"rgba(214,128,120,.75)");
+  vstroke(x,LO,.08,.9,t=>1.2,"rgba(255,255,255,.35)");
+  // 라이너
+  if(!bare&&M.liner){
+    if(M.wing){vstroke(x,UP,.18,1,t=>2+t*10,M.liner);const a=bez(UP,.8),b=bez(UP,1);x.fillStyle=M.liner;x.beginPath();x.moveTo(a[0],a[1]-6);x.quadraticCurveTo(b[0]+10,b[1]-24,M.wing[0],M.wing[1]);x.quadraticCurveTo(b[0]+4,b[1]-4,b[0]-6,b[1]+2);x.closePath();x.fill()}
+    else vstroke(x,UP,.12,.98,t=>2+3*t,rgba(M.liner,.85));
+  }
+  // 윗속눈썹
+  const mc=bare?"#2b1c16":(M.mascara||"#1b1210");
+  for(let k=0;k<78;k++){const t=.03+.96*k/77+(r()-.5)*.006,p=bez(UP,t),[tx,ty]=bezT(UP,t);let nx=ty,ny=-tx;const len=(bare?22:30)+(bare?24:44)*Math.pow(t,1.4)+r()*8,curl=.35+t*.55;hair(x,p[0],p[1]+2,nx,ny,tx,ty,len,curl,(bare?2:2.8)+r()*.8,mc)}
+  if(!bare)for(let k=0;k<30;k++){const t=.45+.53*r(),p=bez(UP,t),[tx,ty]=bezT(UP,t);hair(x,p[0],p[1]+2,ty,-tx,tx,ty,40+44*t+r()*10,.5+t*.5,2.4,mc)}
+  // 아랫속눈썹
+  for(let k=0;k<26;k++){const t=.04+.7*k/25,p=bez(LO,t),[tx,ty]=bezT(LO,t);hair(x,p[0],p[1]+1,ty,-tx,-tx,-ty,8+16*(1-t)+r()*4,.25,1.2,bare?"rgba(50,32,24,.6)":"rgba(30,20,16,.75)")}
+  if(!bare&&M.under)[.08,.2,.32,.46].forEach(t=>{const p=bez(LO,t),[tx,ty]=bezT(LO,t);hair(x,p[0],p[1]+2,ty,-tx,-tx,-ty,26+ (1-t)*10,.15,2.6,rgba(M.liner,.8))});
+  // 글리터 & 물광
+  if(!bare&&M.tear){x.globalCompositeOperation="screen";for(let k=0;k<=18;k++){const t=.15+k/18*.65,p=bez(LO,t);blob(x,p[0],p[1]+18,34,10,"#ffffff",.28,0)}x.globalCompositeOperation="source-over"}
+  if(!bare&&M.glitter){for(let k=0;k<260;k++){const t=.15+r()*.75,p=bez(UP,t),q=bez(CR,t),s=.25+r()*.6,gx=p[0]+(q[0]-p[0])*s+(r()-.5)*20,gy=p[1]+(q[1]-p[1])*s;const col=M.glitter[k%M.glitter.length],rr=.6+r()*1.8;x.fillStyle=rgba(col,.75+r()*.25);x.beginPath();x.arc(gx,gy,rr,0,7);x.fill();if(k%22===0){blob(x,gx,gy,10,10,"#ffffff",.8,0);x.strokeStyle="rgba(255,255,255,.95)";x.lineWidth=1.2;x.beginPath();x.moveTo(gx-11,gy);x.lineTo(gx+11,gy);x.moveTo(gx,gy-11);x.lineTo(gx,gy+11);x.stroke()}}
+    for(let k=0;k<60;k++){const t=.55+r()*.35,p=bez(LO,t);x.fillStyle=rgba(M.glitter[k%M.glitter.length],.9);x.beginPath();x.arc(p[0]+(r()-.5)*10,p[1]+12+r()*14,.6+r()*1.4,0,7);x.fill()}}
+  if(!bare&&M.sticker){const st=(cx,cy,rr,rot)=>{x.save();x.translate(cx,cy);x.rotate(rot);x.shadowColor="rgba(80,40,40,.25)";x.shadowBlur=6;x.shadowOffsetY=2;const gg=x.createLinearGradient(-rr,-rr,rr,rr);gg.addColorStop(0,"#ffe5f4");gg.addColorStop(.35,"#d4efff");gg.addColorStop(.7,"#fff3b8");gg.addColorStop(1,"#e4d8ff");x.fillStyle=gg;x.beginPath();for(let k=0;k<10;k++){const a=Math.PI/5*k-Math.PI/2,q=k%2?rr*.45:rr;k?x.lineTo(Math.cos(a)*q,Math.sin(a)*q):x.moveTo(Math.cos(a)*q,Math.sin(a)*q)}x.closePath();x.fill();x.shadowColor="transparent";x.strokeStyle="rgba(255,255,255,.9)";x.lineWidth=1.5;x.stroke();x.restore()};st(560,400,18,.2);st(600,372,10,-.3);st(520,420,8,.4)}
+  // 피부 결
+  const im=x.getImageData(0,0,W,H),d=im.data;for(let k=0;k<d.length;k+=4){const n=(r()-.5)*9;d[k]+=n;d[k+1]+=n;d[k+2]+=n}x.putImageData(im,0,0);
+}
+/* ===== 모델 사진 가상 메이크업 (자연스러운 발색) ===== */
+const MODEL={src:"model.jpg",crop:[1030,140,512,320],
+  eyes:[{inner:[1222,276],top:[1176,256],outer:[1122,282],low:[1172,294],side:-1,sc:1},
+        {inner:[1322,227],top:[1353,210],outer:[1392,207],low:[1357,238],side:1,sc:.72}],
+  cheeks:[[1168,342,62,32,-.35]],lips:[1335,432,50,18,-.35]};
+let _img=null,_imgP=null;
+function loadModel(){if(_imgP)return _imgP;_imgP=new Promise(res=>{const im=new Image();im.onload=()=>{_img=im;res(im)};im.onerror=()=>res(null);im.src=MODEL.src});return _imgP}
+function lashPt(E,t){const c=[2*E.top[0]-(E.inner[0]+E.outer[0])/2,2*E.top[1]-(E.inner[1]+E.outer[1])/2],m=1-t;return [m*m*E.inner[0]+2*m*t*c[0]+t*t*E.outer[0],m*m*E.inner[1]+2*m*t*c[1]+t*t*E.outer[1]]}
+function lashTan(E,t){const a=lashPt(E,Math.max(0,t-.02)),b=lashPt(E,Math.min(1,t+.02)),l=Math.hypot(b[0]-a[0],b[1]-a[1])||1;return [(b[0]-a[0])/l,(b[1]-a[1])/l]}
+function upN(E,t){const [tx,ty]=lashTan(E,t);let nx=ty,ny=-tx;if(ny>0){nx=-nx;ny=-ny}return [nx,ny]}
+const LOOKFX={
+  magical:{lid:.5,depth:.14,liner:.55,wing:4,shimmer:28,twinkle:3,blush:.5,lip:.35},
+  pure:{lid:.4,depth:.08,liner:.35,wing:0,shimmer:0,twinkle:0,blush:.5,lip:.3,tearOnly:true},
+  tsundere:{lid:.45,depth:.14,liner:.75,wing:9,shimmer:0,twinkle:0,blush:.6,lip:.4,diag:true},
+  darkcool:{lid:.45,depth:.16,liner:.7,wing:7,shimmer:0,twinkle:0,blush:.25,lip:.25},
+  school:{lid:.35,depth:.08,liner:.3,wing:0,shimmer:0,twinkle:0,blush:.4,lip:.25},
+  idol:{lid:.5,depth:.12,liner:.6,wing:5,shimmer:34,twinkle:3,blush:.45,lip:.35,sticker:true}
+};
+function drawTryOn(cv,L,bare,img){
+  const [cx,cy,cw,ch]=MODEL.crop,S=2;cv.width=cw*S;cv.height=ch*S;const x=cv.getContext("2d");
+  x.drawImage(img,cx,cy,cw,ch,0,0,cw*S,ch*S);
+  if(bare||!L)return;
+  const M=L.mk,F=LOOKFX[L.id]||LOOKFX.school,r=rng(5);x.setTransform(S,0,0,S,-cx*S,-cy*S);
+  const lip=(L.kit.find(k=>k.t==="tint"||k.t==="balm")||{}).c;
+  MODEL.eyes.forEach(E=>{
+    // 눈두덩: 색은 soft-light로 얇게, 깊이는 multiply로 살짝
+    const sc=E.sc;for(let k=0;k<=30;k++){const t=k/30,p=lashPt(E,t),[nx,ny]=upN(E,t),lift=(8+8*Math.sin(Math.PI*t))*sc,col=mix(t<.55?M.sh[0]:M.sh[1],.25),edge=Math.sin(Math.PI*Math.min(1,t*1.15));
+      x.globalCompositeOperation="soft-light";blob(x,p[0]+nx*lift,p[1]+ny*lift,15*sc,13*sc,col,F.lid*.42*edge,0);
+      x.globalCompositeOperation="multiply";blob(x,p[0]+nx*lift*.8,p[1]+ny*lift*.8,13*sc,10*sc,col,F.lid*.13*edge,0)}
+    x.globalCompositeOperation="multiply";
+    for(let k=0;k<=8;k++){const t=.65+k/8*.35,p=lashPt(E,t),[nx,ny]=upN(E,t);blob(x,p[0]+nx*5*E.sc,p[1]+ny*5*E.sc,9*E.sc,7*E.sc,M.outer,F.depth*.8,0)}
+    // 언더: 눈꼬리 쪽 1/3만
+    const lo=E.low,ou=E.outer;for(let k=0;k<=5;k++){const s=.45+k/5*.5,px=lo[0]+(ou[0]-lo[0])*s,py=lo[1]+(ou[1]-lo[1])*s+2;blob(x,px,py,6,3.5,M.sh[1],F.depth*.9,0)}
+    x.globalCompositeOperation="source-over";
+    // 라이너: 속눈썹 라인을 따라 가늘게
+    x.strokeStyle=rgba(M.liner,F.liner*.85);x.lineCap="round";
+    for(let k=0;k<20;k++){const t0=.3+k/20*.7,t1=.3+(k+1)/20*.7,a=lashPt(E,t0),b=lashPt(E,t1);x.lineWidth=(.45+1.1*t0)*E.sc;x.beginPath();x.moveTo(a[0],a[1]-.4);x.lineTo(b[0],b[1]-.4);x.stroke()}
+    if(F.wing){const o=E.outer,[tx,ty]=lashTan(E,1),[nx,ny]=upN(E,1);const wl=F.wing*E.sc,wx=o[0]+tx*wl+nx*wl*.4,wy=o[1]+ty*wl+ny*wl*.4;x.fillStyle=rgba(M.liner,F.liner*.95);x.beginPath();const b=lashPt(E,.9);x.moveTo(b[0],b[1]-1);x.quadraticCurveTo(o[0]+tx*2,o[1]+ty*2-1,wx,wy);x.lineTo(o[0],o[1]+.6);x.closePath();x.fill()}
+    // 애교살 물광
+    if(M.tear){x.globalCompositeOperation="screen";for(let k=0;k<=8;k++){const s=k/8,px=E.inner[0]+(E.outer[0]-E.inner[0])*s,py=E.low[1]+5+Math.sin(Math.PI*s)*2;blob(x,px,py,7,3,"#ffffff",.14,0)}x.globalCompositeOperation="source-over"}
+    // 미세 펄
+    if(F.shimmer){for(let k=0;k<F.shimmer;k++){const t=.25+r()*.55,p=lashPt(E,t),[nx,ny]=upN(E,t),d=4+r()*9;x.fillStyle=rgba((M.glitter||["#ffffff"])[k%(M.glitter||[1]).length],.45+r()*.35);x.beginPath();x.arc(p[0]+nx*d+(r()-.5)*3,p[1]+ny*d,.25+r()*.45,0,7);x.fill()}
+      for(let k=0;k<F.twinkle;k++){const t=.35+r()*.35,p=lashPt(E,t),[nx,ny]=upN(E,t),d=6+r()*5;blob(x,p[0]+nx*d,p[1]+ny*d,2.4,2.4,"#ffffff",.75,0)}}
+  });
+  // 홍조
+  if(M.blush)MODEL.cheeks.forEach((c,j)=>{const e=F.diag&&j===0?[c[0]-10,c[1]-8,c[2]*1.1,c[3]*.7,-.45]:c;x.globalCompositeOperation="soft-light";blob(x,e[0],e[1],e[2],e[3],M.blush,F.blush,e[4]);x.globalCompositeOperation="multiply";blob(x,e[0],e[1],e[2]*.85,e[3]*.85,M.blush,F.blush*.22,e[4])});
+  // 립
+  if(lip){const l=MODEL.lips;x.globalCompositeOperation="color";blob(x,l[0],l[1],l[2],l[3],lip[0],F.lip,l[4]);x.globalCompositeOperation="multiply";blob(x,l[0],l[1],l[2]*.75,l[3]*.7,lip[0],F.lip*.3,l[4])}
+  x.globalCompositeOperation="source-over";
+  // 스티커: 눈꼬리 아래 작게 하나
+  if(F.sticker){const e=MODEL.eyes[0],sx=e.outer[0]+2,sy=e.low[1]+14,rr=4.2;x.save();x.translate(sx,sy);x.rotate(.2);x.shadowColor="rgba(80,40,40,.25)";x.shadowBlur=2;x.shadowOffsetY=.6;const gg=x.createLinearGradient(-rr,-rr,rr,rr);gg.addColorStop(0,"#fff0f8");gg.addColorStop(.5,"#dff2ff");gg.addColorStop(1,"#fff4c4");x.fillStyle=gg;x.beginPath();for(let k=0;k<10;k++){const a=Math.PI/5*k-Math.PI/2,q=k%2?rr*.45:rr;k?x.lineTo(Math.cos(a)*q,Math.sin(a)*q):x.moveTo(Math.cos(a)*q,Math.sin(a)*q)}x.closePath();x.fill();x.restore()}
+  x.setTransform(1,0,0,1,0,0);
+}
+function paintEyes(){loadModel().then(img=>{document.querySelectorAll("canvas.eyecv:not([data-done])").forEach((cv,j)=>{cv.dataset.done="1";setTimeout(()=>{const L=LOOKS.find(l=>l.id===cv.dataset.look);if(img)drawTryOn(cv,L,cv.dataset.bare==="1",img);else drawEye(cv,L,cv.dataset.bare==="1")},30*j)})})}
+
+/* ===== 퀴즈 ===== */
+const QUIZ=[
+  {q:"애니 속 내가 등장하는 장면은?",a:[["변신 이펙트가 터지는 클라이맥스",{magical:2,idol:1}],["벚꽃 날리는 등굣길",{pure:2,school:1}],["\"딱히 너 때문은 아니거든\" 하는 장면",{tsundere:2}],["비 내리는 옥상 위 결전",{darkcool:2}]]},
+  {q:"평소 메이크업 실력은?",a:[["거의 처음이에요",{school:2,pure:1}],["기본은 할 수 있어요",{pure:1,tsundere:1}],["라이너 꼬리도 자신 있어요",{darkcool:1,tsundere:1}],["글리터·스티커까지 다 써 봤어요",{idol:2,magical:1}]]},
+  {q:"끌리는 색 조합은?",a:[["핑크 + 라일락",{magical:2}],["피치 + 코랄",{pure:2}],["레드 + 로즈",{tsundere:2}],["블루 + 옐로",{idol:2}],["플럼 + 블랙",{darkcool:2}],["베이지 + 살구",{school:2}]]}
+];
+let qi=0,score={};
+function renderQuiz(){
+  const box=$("#quizBox");
+  if(qi>=QUIZ.length){
+    box.innerHTML=`<span class="qstep">완료</span><div class="qtitle">진단이 끝났어요!</div><button class="btn" id="qReset">다시 하기</button><div class="prog"><i style="width:100%"></i></div>`;
+    $("#qReset").onclick=()=>{qi=0;score={};renderQuiz();$("#quizResult").innerHTML=`<span class="qstep">진단 결과</span><h3 style="font-size:24px">질문에 답하면 여기에 추천 룩이 나와요</h3>`};
+    const best=Object.entries(score).sort((a,b)=>b[1]-a[1])[0][0];
+    const l=LOOKS.find(x=>x.id===best);
+    $("#quizResult").innerHTML=`<span class="qstep">당신의 여주 룩</span><div style="border-radius:12px;overflow:hidden"><canvas class="eyecv" data-look="${l.id}" style="width:100%;display:block;aspect-ratio:8/5"></canvas></div><h3 style="font-size:26px">${l.name}</h3><p class="note">${l.mood}</p><ol style="margin:0;padding-left:20px;font-size:14px">${l.steps.map(s=>`<li>${s}</li>`).join("")}</ol><span class="kit-title">키트 구성품</span><div class="flat">${flatlay(l)}</div>${kitList(l)}<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap"><span class="price num"><s>${won(l.orig)}</s>${won(l.price)}</span><button class="btn pink" data-add="k_${l.id}">키트 담기</button></div>`;paintEyes();
+    return;
+  }
+  const Q=QUIZ[qi];
+  box.innerHTML=`<span class="qstep">Q${qi+1} / ${QUIZ.length}</span><div class="qtitle">${Q.q}</div><div class="opts">${Q.a.map((a,i)=>`<button class="opt" data-qa="${i}">${esc(a[0])}</button>`).join("")}</div><div class="prog"><i style="width:${qi/QUIZ.length*100}%"></i></div>`;
+  box.querySelectorAll("[data-qa]").forEach(b=>b.onclick=()=>{const w=Q.a[+b.dataset.qa][1];for(const k in w)score[k]=(score[k]||0)+w[k];qi++;renderQuiz()});
+}
+
+/* ===== 룩 / 숍 렌더 ===== */
+function priceHTML(p){const s=p.sale&&p.sale<p.price;return s?`<span class="price num"><span class="off">${Math.round((1-p.sale/p.price)*100)}%</span>${won(p.sale)}</span><span class="note num"><s>${won(p.price)}</s></span>`:`<span class="price num">${won(p.price)}</span>`}
+const unit=p=>p.sale||p.price;
+function renderLooks(){
+  $("#lookGrid").innerHTML=LOOKS.map(l=>`<article class="panel look"><div class="art"><canvas class="eyecv" data-look="${l.id}" aria-label="${l.name} 완성 눈매"></canvas>${l.tag?`<span class="tag pink" style="position:absolute;left:12px;top:12px">${l.tag}</span>`:""}<span class="cmp-lab r">완성 룩</span></div><div class="body"><h3>${l.name}</h3><span class="mood">${l.mood}</span><div class="swatch-row" style="margin:0">${l.colors.map(c=>`<span class="sw" style="background:${c};width:22px;height:22px;border:1px solid rgba(0,0,0,.08)"></span>`).join("")}</div><span class="kit-title">키트 구성품 ${l.kit.length+1}종</span><div class="flat">${flatlay(l)}</div>${kitList(l)}<details><summary style="cursor:pointer;font-weight:700;font-size:13.5px">메이크업 순서 보기</summary><ol style="margin-top:6px">${l.steps.map(s=>`<li>${s}</li>`).join("")}</ol></details><div class="foot"><span class="price num"><s>${won(l.orig)}</s>${won(l.price)}</span><button class="btn sm pink" data-add="k_${l.id}">키트 담기</button></div></div></article>`).join("");
+  paintEyes();
+}
+let filter="all",sort="rec";
+function renderFilters(){
+  $("#filters").innerHTML=Object.entries(CATS).map(([k,v])=>`<button class="chip ${filter===k?"on":""}" data-f="${k}" aria-pressed="${filter===k}">${v}</button>`).join("")+`<select class="sortsel" id="sortSel" aria-label="정렬"><option value="rec">추천순</option><option value="low">낮은 가격순</option><option value="high">높은 가격순</option><option value="sale">할인율순</option></select>`;
+  $("#sortSel").value=sort;
+  $("#sortSel").onchange=e=>{sort=e.target.value;renderProducts()};
+  document.querySelectorAll("[data-f]").forEach(b=>b.onclick=()=>{filter=b.dataset.f;renderFilters();renderProducts()});
+}
+function renderProducts(){
+  const qv=(($("#q")||{}).value||"").trim();let list=PRODUCTS.filter(p=>(filter==="all"||p.cat===filter)&&(!qv||p.name.includes(qv)||(CATS[p.cat]||"").includes(qv)));
+  if(sort==="low")list=[...list].sort((a,b)=>unit(a)-unit(b));
+  if(sort==="high")list=[...list].sort((a,b)=>unit(b)-unit(a));
+  if(sort==="sale")list=[...list].sort((a,b)=>(unit(a)/a.price)-(unit(b)/b.price));
+  $("#productGrid").innerHTML=(list.length?"":`<p class="note">검색 결과가 없어요. 다른 이름으로 찾아보세요.</p>`)+list.map(p=>`<article class="panel card" data-pd="${p.id}" tabindex="0" aria-label="${esc(p.name)} 상세 보기"><div class="pic">${pic(p)}<div class="tags">${p.tag?`<span class="tag ${p.tag==="BEST"?"pink":""}">${p.tag}</span>`:""}${p.sale?`<span class="tag mint">SALE</span>`:""}</div></div><div class="info"><span class="cat">${CATS[p.cat]}</span><span class="nm">${esc(p.name)}</span><div>${priceHTML(p)}</div><div class="add"><button class="btn" data-add="${p.id}">담기</button><a class="btn naver" href="${ssLink(p.id)}" target="_blank" rel="noopener" data-stop>N 구매</a></div></div></article>`).join("");
+}
+
+/* ===== 상품 상세 ===== */
+function openPD(id){
+  const p=PRODUCTS.find(x=>x.id===id);if(!p)return;
+  $("#pdTitle").textContent=CATS[p.cat];
+  $("#pdBody").innerHTML=`<div class="pd"><div class="pic" style="overflow:hidden">${pic(p)}</div><div class="meta"><h3>${esc(p.name)}</h3><div>${priceHTML(p)}</div><p style="font-size:14px">${esc(p.desc)}</p>${p.look?`<span class="kit-title">구성품</span>${kitList(LOOKS.find(l=>l.id===p.look))}`:""}<div class="fld"><label for="pdOpt">옵션</label><select id="pdOpt">${p.opts.map(o=>`<option>${esc(o)}</option>`).join("")}</select></div><div class="fld"><label>수량</label><div class="qty"><button id="pdMinus" aria-label="수량 줄이기">−</button><span id="pdQty">1</span><button id="pdPlus" aria-label="수량 늘리기">+</button></div></div><div class="note">적립 1% · 50,000원 이상 무료배송 · 계좌이체 2% 할인</div><button class="btn pink block" id="pdAdd">장바구니 담기</button><button class="btn ink block" id="pdBuy">바로 계좌이체 주문</button><a class="btn naver block" href="${ssLink(p.id)}" target="_blank" rel="noopener">네이버 스마트스토어에서 구매</a></div></div>`;
+  let q=1;
+  $("#pdMinus").onclick=()=>{q=Math.max(1,q-1);$("#pdQty").textContent=q};
+  $("#pdPlus").onclick=()=>{q=Math.min(20,q+1);$("#pdQty").textContent=q};
+  $("#pdAdd").onclick=()=>{addCart(p.id,$("#pdOpt").value,q);closeModal("pdModal")};
+  $("#pdBuy").onclick=()=>{addCart(p.id,$("#pdOpt").value,q,true);closeModal("pdModal");openCheckout()};
+  openModal("pdModal");
+}
+
+/* ===== 장바구니 ===== */
+function addCart(id,opt,qty,silent){
+  qty=qty||1;
+  let item;
+  const p=PRODUCTS.find(x=>x.id===id);
+  if(p){opt=opt||p.opts[0];item={key:id+"|"+opt,id,name:p.name,opt,price:unit(p),list:p.price,qty,type:"goods",cat:p.cat,t:p.t,c:p.c,look:p.look}}
+  const pl=PLANS.find(x=>x.id===id);
+  if(pl){item={key:id,id,name:"월간 여주 박스 "+pl.name,opt:"첫 달 결제 · 매월 갱신",price:pl.price,list:pl.price,qty:1,type:"sub",t:"box",c:["#f4b6c8"]};cart=cart.filter(x=>x.type!=="sub")}
+  const cl=CLASSES.find(x=>x.id===id);
+  if(cl){item={key:id+"|"+opt,id,name:cl.name,opt:opt||"수강권",price:cl.price,list:cl.price,qty:1,type:"class",t:"ticket",c:["#f4b6c8"]}}
+  if(!item)return;
+  const ex=cart.find(x=>x.key===item.key);
+  if(ex&&item.type==="goods")ex.qty=Math.min(20,ex.qty+qty);else if(!ex)cart.push(item);
+  persist();
+  if(!silent)toast("장바구니에 담았어요");
+}
+function persist(){save("hl_cart",cart);save("hl_coupon",coupon);renderCart()}
+const COUPONS={YEOJU10:{label:"첫 구매 10%",calc:s=>r10(s*0.1)},WELCOME3000:{label:"3만원 이상 3,000원",calc:s=>s>=30000?3000:0}};
+function calc(method){
+  const sub=cart.reduce((a,b)=>a+b.price*b.qty,0);
+  const listSum=cart.reduce((a,b)=>a+b.list*b.qty,0);
+  const cDisc=coupon&&COUPONS[coupon]?Math.min(sub,COUPONS[coupon].calc(sub)):0;
+  const goods=cart.filter(x=>x.type==="goods").reduce((a,b)=>a+b.price*b.qty,0);
+  const ship=goods>0&&(sub-cDisc)<S.freeShip?S.shipFee:0;
+  const pDisc=method==="bank"?r10((sub-cDisc)*S.transferRate):0;
+  const total=Math.max(0,sub-cDisc-pDisc+ship);
+  return {sub,listSum,cDisc,pDisc,ship,total,points:Math.floor(total*0.01),goods,saved:listSum-sub};
+}
+function renderCart(){
+  const n=cart.reduce((a,b)=>a+b.qty,0);
+  $("#cartCount").textContent=n;
+  const t=calc();
+  $("#fabTotal").textContent=n?"· "+won(t.total):"";
+  const body=$("#cartBody"),foot=$("#cartFoot");
+  if(!cart.length){body.innerHTML=`<div class="empty"><svg viewBox="0 0 120 90" width="120" aria-hidden="true"><rect x="20" y="30" width="80" height="54" rx="8" fill="#ffd3e3" stroke="#241a3d" stroke-width="3"/><path d="M40 30 Q60 0 80 30" stroke="#241a3d" stroke-width="3" fill="none"/></svg><p style="margin-top:10px">장바구니가 비어 있어요</p><a class="btn sm" href="#looks" data-closecart style="margin-top:12px">룩 키트 보러가기</a></div>`;foot.innerHTML="";return}
+  const need=Math.max(0,S.freeShip-(t.sub-t.cDisc));
+  body.innerHTML=(t.goods?`<div class="ship-bar">${need?`<b class="num">${won(need)}</b> 더 담으면 무료배송!`:"무료배송 조건을 채웠어요 ✦"}<div class="prog"><i style="width:${Math.min(100,(t.sub-t.cDisc)/S.freeShip*100)}%"></i></div></div>`:"")+
+  cart.map((it,i)=>`<div class="ci"><div class="th">${PHOTO[it.id]?`<img src="${PHOTO[it.id]}" alt="" style="width:100%;height:100%;object-fit:cover">`:prodSVG(it.t,it.c,it.look)}</div><div><div class="n">${esc(it.name)}</div><div class="o">${esc(it.opt)}</div>${it.type==="goods"?`<div class="qty"><button data-q="${i}" data-d="-1" aria-label="줄이기">−</button><span>${it.qty}</span><button data-q="${i}" data-d="1" aria-label="늘리기">+</button></div>`:`<span class="tag mint">${it.type==="sub"?"정기구독":"클래스"}</span>`}</div><div style="text-align:right"><div class="num" style="font-weight:900">${won(it.price*it.qty)}</div><button class="rm" data-rm="${i}">삭제</button></div></div>`).join("")+
+  `<div class="coupon"><input id="cpIn" placeholder="쿠폰 코드 (예: YEOJU10)" aria-label="쿠폰 코드" value="${coupon||""}"><button class="btn sm" id="cpBtn">${coupon?"해제":"적용"}</button></div>`+
+  `<div class="sum num"><div><span>상품 금액</span><span>${won(t.sub)}</span></div>${t.saved?`<div style="color:var(--pink)"><span>상품 할인 반영</span><span>-${won(t.saved)}</span></div>`:""}${t.cDisc?`<div style="color:var(--pink)"><span>쿠폰 (${COUPONS[coupon].label})</span><span>-${won(t.cDisc)}</span></div>`:""}<div><span>배송비</span><span>${t.ship?won(t.ship):"무료"}</span></div><div class="tot"><span>예상 결제 금액</span><span>${won(t.total)}</span></div><div class="note"><span>계좌이체 선택 시 2% 추가 할인</span><span>-${won(calc("bank").pDisc)}</span></div></div>`;
+  foot.innerHTML=`<button class="btn pink block" id="goCheckout">주문하기</button><a class="btn naver block" href="${ssLink()}" target="_blank" rel="noopener">N 스마트스토어에서 보기</a>`;
+  body.querySelectorAll("[data-q]").forEach(b=>b.onclick=()=>{const it=cart[+b.dataset.q];it.qty=Math.min(20,it.qty+(+b.dataset.d));if(it.qty<1)cart.splice(+b.dataset.q,1);persist()});
+  body.querySelectorAll("[data-rm]").forEach(b=>b.onclick=()=>{cart.splice(+b.dataset.rm,1);persist()});
+  $("#cpBtn").onclick=()=>{if(coupon){coupon=null;persist();return}const v=$("#cpIn").value.trim().toUpperCase();if(COUPONS[v]){coupon=v;persist();toast("쿠폰을 적용했어요")}else toast("쿠폰 코드를 다시 확인해 주세요")};
+  $("#goCheckout").onclick=()=>{closeCart();openCheckout()};
+}
+function openCart(){$("#drawer").classList.add("open");$("#drawer").setAttribute("aria-hidden","false");$("#scrim").classList.add("open")}
+function closeCart(){$("#drawer").classList.remove("open");$("#drawer").setAttribute("aria-hidden","true");$("#scrim").classList.remove("open")}
+function openModal(id){$("#"+id).classList.add("open");$("#scrim").classList.add("open")}
+function closeModal(id){$("#"+id).classList.remove("open");if(!$("#drawer").classList.contains("open"))$("#scrim").classList.remove("open")}
+
+/* ===== 결제 ===== */
+let co={step:1,method:"bank",info:{}};
+function openCheckout(){
+  if(!cart.length){toast("장바구니가 비어 있어요");return}
+  co={step:1,method:co.method||"bank",info:co.info||{}};
+  renderCO();openModal("coModal");
+}
+function stepsBar(){return `<div class="steps">${["배송 정보","결제 수단","주문 완료"].map((s,i)=>`<span class="${co.step===i+1?"on":""}">${i+1}. ${s}</span>`).join("")}</div>`}
+function orderLines(){return cart.map(it=>`<div class="ss-item"><span>${esc(it.name)} <span class="note">${esc(it.opt)} × ${it.qty}</span></span><b class="num">${won(it.price*it.qty)}</b></div>`).join("")}
+function renderCO(){
+  const B=$("#coBody");const f=co.info;
+  const onlyDigital=!cart.some(x=>x.type!=="class");
+  if(co.step===1){
+    B.innerHTML=stepsBar()+`<form id="f1" class="form" novalidate>
+      <div class="fld"><label for="oName">주문자 이름</label><input id="oName" autocomplete="name" value="${esc(f.name||"")}" required><span class="err" id="eName"></span></div>
+      <div class="fld"><label for="oPhone">휴대폰 번호</label><input id="oPhone" inputmode="tel" autocomplete="tel" placeholder="010-0000-0000" value="${esc(f.phone||"")}" required><span class="err" id="ePhone"></span></div>
+      <div class="fld full"><label for="oEmail">이메일 (주문 안내 발송)</label><input id="oEmail" type="email" autocomplete="email" value="${esc(f.email||"")}"></div>
+      ${onlyDigital?`<p class="note full">클래스만 주문하셔서 배송 정보는 받지 않아요. 수강 안내는 문자로 보내 드려요.</p>`:`
+      <div class="fld"><label for="oZip">우편번호</label><input id="oZip" inputmode="numeric" autocomplete="postal-code" value="${esc(f.zip||"")}"></div>
+      <div class="fld"><label for="oAddr">주소</label><input id="oAddr" autocomplete="street-address" value="${esc(f.addr||"")}" required><span class="err" id="eAddr"></span></div>
+      <div class="fld full"><label for="oAddr2">상세 주소</label><input id="oAddr2" value="${esc(f.addr2||"")}"></div>
+      <div class="fld full"><label for="oMemo">배송 메모</label><select id="oMemo"><option>문 앞에 놓아 주세요</option><option>경비실에 맡겨 주세요</option><option>배송 전 연락 주세요</option><option>택배함에 넣어 주세요</option></select></div>`}
+      <div class="full" style="display:flex;justify-content:flex-end"><button class="btn pink" type="submit">결제 수단 선택</button></div></form>`;
+    if($("#oMemo")&&f.memo)$("#oMemo").value=f.memo;
+    $("#f1").onsubmit=e=>{e.preventDefault();
+      const g=id=>($("#"+id)?$("#"+id).value.trim():"");
+      const v={name:g("oName"),phone:g("oPhone"),email:g("oEmail"),zip:g("oZip"),addr:g("oAddr"),addr2:g("oAddr2"),memo:g("oMemo")};
+      let ok=true;
+      $("#eName").textContent=v.name?"":"이름을 입력해 주세요";if(!v.name)ok=false;
+      const ph=/^01[0-9]-?\d{3,4}-?\d{4}$/.test(v.phone);$("#ePhone").textContent=ph?"":"010-1234-5678 형식으로 입력해 주세요";if(!ph)ok=false;
+      if(!onlyDigital){$("#eAddr").textContent=v.addr?"":"주소를 입력해 주세요";if(!v.addr)ok=false}
+      if(!ok)return;co.info=v;co.step=2;renderCO();
+    };
+    return;
+  }
+  if(co.step===2){
+    const t=calc(co.method);
+    B.innerHTML=stepsBar()+`<div class="pay-methods" role="radiogroup" aria-label="결제 수단">
+      <button class="pm ${co.method==="bank"?"on":""}" data-m="bank" role="radio" aria-checked="${co.method==="bank"}"><span class="logo-b">₩</span><b>무통장 계좌이체</b><span>수수료 0원 · 2% 추가 할인</span></button>
+      <button class="pm ${co.method==="naver"?"on":""}" data-m="naver" role="radio" aria-checked="${co.method==="naver"}"><span class="logo-n">N</span><b>네이버 스마트스토어</b><span>네이버페이 · 카드 · 포인트 적립</span></button>
+    </div><div id="payArea"></div>`;
+    B.querySelectorAll("[data-m]").forEach(b=>b.onclick=()=>{co.method=b.dataset.m;renderCO()});
+    const A=$("#payArea");
+    const sumHTML=`<div class="sum num"><div><span>상품 금액</span><span>${won(t.sub)}</span></div>${t.cDisc?`<div style="color:var(--pink)"><span>쿠폰</span><span>-${won(t.cDisc)}</span></div>`:""}${t.pDisc?`<div style="color:var(--pink)"><span>계좌이체 2% 할인</span><span>-${won(t.pDisc)}</span></div>`:""}<div><span>배송비</span><span>${t.ship?won(t.ship):"무료"}</span></div><div class="tot"><span>최종 결제 금액</span><span>${won(t.total)}</span></div><div class="note"><span>적립 예정</span><span>${won(t.points)}</span></div></div>`;
+    if(co.method==="bank"){
+      A.innerHTML=`<div class="paybox"><div class="ss-items">${orderLines()}</div>${sumHTML}
+        <div class="acct"><div><span class="note">입금 계좌</span><br><b class="num">${esc(S.bank)} ${esc(S.account)}</b><br><span class="note">예금주 ${esc(S.holder)}</span></div><button class="btn sm" id="cpAcct" type="button">계좌 복사</button></div>
+        <div class="fld"><label for="dep">입금자명</label><input id="dep" value="${esc(co.info.dep||co.info.name)}"><span class="note">주문자와 다르면 꼭 바꿔 주세요. 이름이 다르면 입금 확인이 늦어져요.</span></div>
+        <div class="fld"><label>현금영수증</label><div class="radio-row"><label><input type="radio" name="rc" value="none" checked> 신청 안 함</label><label><input type="radio" name="rc" value="personal"> 소득공제용</label><label><input type="radio" name="rc" value="biz"> 지출증빙용</label></div><input id="rcNo" placeholder="휴대폰 번호 또는 사업자번호" style="display:none" aria-label="현금영수증 번호"></div>
+        <label class="agree"><input type="checkbox" id="agree"> <span>주문 내용을 확인했고, 개인정보 수집·이용(배송·주문 안내 목적, 5년 보관)과 ${S.depositHours}시간 내 미입금 시 자동 취소에 동의해요.</span></label>
+        <div style="display:flex;gap:10px;justify-content:space-between;flex-wrap:wrap"><button class="btn" id="back1" type="button">이전</button><button class="btn pink" id="placeBank" type="button" disabled>${won(t.total)} 주문 완료하기</button></div></div>`;
+      $("#cpAcct").onclick=()=>copy(`${S.bank} ${S.account} (${S.holder})`,"계좌번호를 복사했어요");
+      B.querySelectorAll("[name=rc]").forEach(r=>r.onchange=()=>{$("#rcNo").style.display=r.value==="none"?"none":"block"});
+      $("#agree").onchange=e=>{$("#placeBank").disabled=!e.target.checked};
+      $("#back1").onclick=()=>{co.step=1;renderCO()};
+      $("#placeBank").onclick=()=>{
+        const rc=B.querySelector("[name=rc]:checked").value;
+        if(rc!=="none"&&!$("#rcNo").value.trim()){toast("현금영수증 번호를 입력해 주세요");return}
+        co.info.dep=$("#dep").value.trim()||co.info.name;
+        placeOrder("bank",t,{receipt:rc,receiptNo:$("#rcNo").value.trim()});
+      };
+    }else{
+      A.innerHTML=`<div class="paybox"><p style="font-size:14px">스마트스토어에서는 네이버페이(카드·계좌·포인트)로 결제할 수 있어요. 아래 상품을 스마트스토어 장바구니에 담아 결제해 주세요.</p>
+        <div class="ss-items">${cart.map(it=>`<div class="ss-item"><span>${esc(it.name)} <span class="note">${esc(it.opt)} × ${it.qty}</span></span><a class="btn sm naver" href="${ssLink(it.type==="goods"?it.id:"")}" target="_blank" rel="noopener">N 상품 열기</a></div>`).join("")}</div>
+        ${sumHTML.replace("최종 결제 금액","예상 결제 금액")}
+        <p class="note">스마트스토어 가격·쿠폰·배송비는 네이버 정책에 따라 조금 다를 수 있어요. 홈페이지 쿠폰은 스마트스토어에서 쓸 수 없어요.</p>
+        <div style="display:flex;gap:10px;justify-content:space-between;flex-wrap:wrap"><button class="btn" id="back1" type="button">이전</button><a class="btn naver" id="goSS" href="${ssLink()}" target="_blank" rel="noopener">네이버 스마트스토어로 이동</a></div></div>`;
+      $("#back1").onclick=()=>{co.step=1;renderCO()};
+      $("#goSS").onclick=()=>{placeOrder("naver",t,{})};
+    }
+    return;
+  }
+  if(co.step===3){
+    const o=co.last;
+    if(o.method==="bank"){
+      const dl=new Date(o.deadline);
+      B.innerHTML=stepsBar()+`<div class="done"><div class="big-check">✓</div><h3 style="font-size:26px">주문이 접수됐어요</h3><p>주문번호 <b class="num">${o.no}</b></p>
+        <div class="acct" style="width:100%;text-align:left"><div><span class="note">입금하실 금액</span><br><b class="num" style="font-size:24px;color:var(--pink)">${won(o.total)}</b><br><span class="num">${esc(S.bank)} ${esc(S.account)}</span><br><span class="note">예금주 ${esc(S.holder)} · 입금자명 ${esc(o.dep)}</span></div><button class="btn sm" id="cpAcct2">계좌 복사</button></div>
+        <p class="note">입금 기한: <b class="num">${dl.getMonth()+1}월 ${dl.getDate()}일 ${String(dl.getHours()).padStart(2,"0")}:${String(dl.getMinutes()).padStart(2,"0")}</b>까지. 입금이 확인되면 문자로 알려 드리고 1~2영업일 안에 출고해요.</p>
+        <button class="btn pink" id="doneBtn">쇼핑 계속하기</button></div>`;
+      $("#cpAcct2").onclick=()=>copy(`${S.bank} ${S.account} ${o.total}원`,"계좌와 금액을 복사했어요");
+    }else{
+      B.innerHTML=stepsBar()+`<div class="done"><div class="big-check" style="background:#03c75a;color:#fff">N</div><h3 style="font-size:26px">스마트스토어로 이동했어요</h3><p>새 창에서 결제를 마무리해 주세요. 결제가 끝나면 네이버 톡톡으로 주문 안내가 와요.</p><p class="note">참조번호 <span class="num">${o.no}</span></p><a class="btn naver" href="${ssLink()}" target="_blank" rel="noopener">스마트스토어 다시 열기</a><button class="btn" id="doneBtn">홈페이지로 돌아가기</button></div>`;
+    }
+    $("#doneBtn").onclick=()=>closeModal("coModal");
+  }
+}
+function placeOrder(method,t,extra){
+  const d=new Date();
+  const no="YJ-"+String(d.getFullYear()).slice(2)+String(d.getMonth()+1).padStart(2,"0")+String(d.getDate()).padStart(2,"0")+"-"+Math.random().toString(36).slice(2,6).toUpperCase();
+  const o={no,method,at:d.toISOString(),deadline:new Date(d.getTime()+S.depositHours*3600e3).toISOString(),status:method==="bank"?"입금대기":"스마트스토어 이동",items:cart.map(x=>({name:x.name,opt:x.opt,qty:x.qty,price:x.price,type:x.type})),total:t.total,coupon:coupon,name:co.info.name,phone:co.info.phone,email:co.info.email,addr:[co.info.zip,co.info.addr,co.info.addr2].filter(Boolean).join(" "),memo:co.info.memo,dep:co.info.dep||co.info.name,...extra};
+  orders.unshift(o);save("hl_orders",orders);
+  co.last=o;co.step=3;
+  if(method==="bank"){cart=[];if(coupon==="YEOJU10")coupon=null;persist()}
+  renderCO();renderOrders();
+}
+
+/* ===== 구독 / 클래스 ===== */
+function renderPlans(){
+  $("#plans").innerHTML=PLANS.map(p=>`<div class="panel plan ${p.best?"best":""}">${p.best?`<span class="tag pink ribbon">가장 많이 선택</span>`:""}<h3>${p.name}</h3><div class="pp num">${won(p.price)}<small> / 월</small></div><ul>${p.feats.map(f=>`<li>${f}</li>`).join("")}</ul><button class="btn ${p.best?"pink":""}" data-add="${p.id}">구독 시작하기</button></div>`).join("");
+}
+let selCls="cls_11",selDate=null,selTime=null;
+function renderClasses(){
+  $("#clsList").innerHTML=CLASSES.map(c=>`<label class="panel cls ${selCls===c.id?"sel":""}"><input type="radio" name="cls" value="${c.id}" ${selCls===c.id?"checked":""}><div><b>${c.name}</b><span>${c.sub}</span></div><span class="price num">${won(c.price)}</span></label>`).join("");
+  document.querySelectorAll("[name=cls]").forEach(r=>r.onchange=()=>{selCls=r.value;selDate=null;selTime=null;renderClasses()});
+  const c=CLASSES.find(x=>x.id===selCls);const bk=$("#booking");
+  if(!c.slots){bk.innerHTML=`<h3 style="font-size:22px">${c.name}</h3><p class="note">결제 후 바로 수강 링크가 문자로 발송돼요. 90일 동안 무제한으로 다시 볼 수 있어요.</p><div class="price num">${won(c.price)}</div><button class="btn pink" id="bookBtn">수강권 담기</button>`;$("#bookBtn").onclick=()=>addCart(c.id,"90일 수강권");return}
+  const days=[];const now=new Date();
+  for(let i=2;days.length<8;i++){const d=new Date(now);d.setDate(now.getDate()+i);if(c.id==="cls_day"&&d.getDay()!==6&&d.getDay()!==0)continue;days.push(d)}
+  const wk="일월화수목금토";
+  const times=c.id==="cls_day"?["11:00","15:00"]:["10:00","13:00","15:00","19:00","21:00"];
+  bk.innerHTML=`<h3 style="font-size:22px">${c.name}</h3><span class="note">날짜를 고르세요</span><div class="slots">${days.map(d=>{const k=d.toISOString().slice(0,10);return `<button class="slot ${selDate===k?"on":""}" data-d="${k}">${d.getMonth()+1}/${d.getDate()} (${wk[d.getDay()]})</button>`}).join("")}</div>
+    <span class="note">시간을 고르세요</span><div class="slots">${times.map((t,i)=>{const full=selDate&&((selDate.charCodeAt(9)+i)%4===0);return `<button class="slot ${selTime===t?"on":""}" data-t="${t}" ${!selDate||full?"disabled":""}>${t}${full?" 마감":""}</button>`}).join("")}</div>
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap"><span class="price num">${won(c.price)}</span><button class="btn pink" id="bookBtn" ${selDate&&selTime?"":"disabled"}>예약 담기</button></div><span class="note">${c.id==="cls_day"?"장소: 성수동 여주메이크업연구소 스튜디오 (주소는 예약 확정 문자로 안내)":"화상 링크는 예약 확정 후 문자로 보내 드려요"} · 3일 전까지 무료 취소</span>`;
+  bk.querySelectorAll("[data-d]").forEach(b=>b.onclick=()=>{selDate=b.dataset.d;selTime=null;renderClasses()});
+  bk.querySelectorAll("[data-t]").forEach(b=>b.onclick=()=>{selTime=b.dataset.t;renderClasses()});
+  $("#bookBtn").onclick=()=>{addCart(c.id,selDate.slice(5).replace("-","/")+" "+selTime+" 예약");};
+}
+
+/* ===== 크리에이터 계산기 ===== */
+function creatorCalc(){
+  const f=+$("#cfol").value,cv=+$("#cconv").value,a=+$("#caov").value;
+  $("#cfolV").textContent="· "+f.toLocaleString("ko-KR")+"명";
+  $("#cconvV").textContent="· "+cv.toFixed(1)+"%";
+  $("#caovV").textContent="· "+won(a);
+  const ord=Math.round(f*cv/100);
+  $("#cOut").textContent=won(ord*a*0.10);
+  $("#cOrders").textContent=`예상 주문 ${ord.toLocaleString("ko-KR")}건 · 판매액 ${won(ord*a)}`;
+}
+
+/* ===== 운영자: 시뮬레이터 ===== */
+const SIM=[
+  ["유입·전환",null],
+  ["visitors","월 방문자 수 (명)",20000],
+  ["cr","구매 전환율 (%)",2.0],
+  ["aov","평균 주문 금액 (원)",42000],
+  ["repeat","재구매 주문 비율 (%)",25],
+  ["결제 채널",null],
+  ["ssShare","스마트스토어 주문 비중 (%)",60],
+  ["ssFee","스마트스토어 수수료 (%, 예시)",5.5],
+  ["bankDisc","계좌이체 할인 (%)",2],
+  ["구독·클래스",null],
+  ["subs","월간 박스 구독자 (명)",150],
+  ["subPrice","평균 구독료 (원)",29900],
+  ["vod","VOD 판매 (건)",40],
+  ["coach","1:1 코칭 (건)",15],
+  ["oneday","원데이 수강생 (명)",16],
+  ["비용",null],
+  ["cogs","상품 원가율 (%)",35],
+  ["shipCost","건당 배송·포장비 (원)",3500],
+  ["creatorShare","크리에이터 코드 매출 비중 (%)",15],
+  ["ads","광고비 (원)",3000000],
+  ["fixed","고정비: 인건비·임대·툴 (원)",2500000]
+];
+let simV=load("hl_sim",null)||Object.fromEntries(SIM.filter(x=>x[1]).map(x=>[x[0],x[2]]));
+function renderSim(){
+  $("#sim").innerHTML=`<h3>가정값 입력</h3>`+SIM.map(x=>x[1]===null?`<div class="grp">${x[0]}</div>`:`<div class="row"><label for="s_${x[0]}">${x[1]}</label><input id="s_${x[0]}" class="num" type="number" step="any" value="${simV[x[0]]}"></div>`).join("")+`<button class="btn sm" id="simReset">기본값으로</button>`;
+  SIM.filter(x=>x[1]).forEach(x=>$("#s_"+x[0]).oninput=e=>{simV[x[0]]=parseFloat(e.target.value)||0;save("hl_sim",simV);simCalc()});
+  $("#simReset").onclick=()=>{simV=Object.fromEntries(SIM.filter(x=>x[1]).map(x=>[x[0],x[2]]));save("hl_sim",simV);renderSim()};
+  simCalc();
+}
+function simCalc(){
+  const v=simV;
+  const newOrders=v.visitors*v.cr/100;
+  const orders=newOrders/(1-Math.min(.9,v.repeat/100));
+  const goods=orders*v.aov;
+  const bankPart=goods*(1-v.ssShare/100);
+  const goodsNet=goods-bankPart*v.bankDisc/100;
+  const sub=v.subs*v.subPrice;
+  const cls=v.vod*29000+v.coach*59000+v.oneday*89000;
+  const rev=goodsNet+sub+cls;
+  const cCogs=(goodsNet+sub)*v.cogs/100+v.oneday*18000;
+  const cFee=goods*v.ssShare/100*v.ssFee/100;
+  const cShip=(orders+v.subs)*v.shipCost;
+  const cCreator=goodsNet*v.creatorShare/100*0.10;
+  const gross=rev-cCogs-cFee-cShip-cCreator;
+  const op=gross-v.ads-v.fixed;
+  const margin=rev?op/rev:0;
+  const contrib=orders?(gross-(sub+cls)*(1-v.cogs/100)+0)/orders:0;
+  const perOrder=v.aov*(1-v.cogs/100)-v.shipCost-v.aov*(v.ssShare/100)*(v.ssFee/100);
+  const fixedNeed=v.ads+v.fixed-(sub*(1-v.cogs/100)-v.subs*v.shipCost)-(cls-v.oneday*18000);
+  const bep=perOrder>0?Math.max(0,Math.ceil(fixedNeed/perOrder)):Infinity;
+  $("#kpis").innerHTML=`<div class="panel kpi"><span>월 매출</span><b class="num">${won(rev)}</b></div><div class="panel kpi ${op>=0?"good":"bad"}"><span>월 영업이익</span><b class="num">${won(op)}</b></div><div class="panel kpi ${op>=0?"good":"bad"}"><span>영업이익률</span><b class="num">${(margin*100).toFixed(1)}%</b></div><div class="panel kpi"><span>손익분기 상품 주문 수</span><b class="num">${isFinite(bep)?bep.toLocaleString("ko-KR")+"건":"-"}</b><span class="note">현재 ${Math.round(orders).toLocaleString("ko-KR")}건</span></div>`;
+  const streams=[["스마트스토어 판매",goods*v.ssShare/100,"#03c75a"],["계좌이체 판매",bankPart-bankPart*v.bankDisc/100,"#241a3d"],["월간 박스 구독",sub,"#ff4f93"],["VOD 클래스",v.vod*29000,"#b49bff"],["1:1 코칭",v.coach*59000,"#6fdcc2"],["원데이 클래스",v.oneday*89000,"#ffe17a"]];
+  const mx=Math.max(...streams.map(s=>s[1]),1);
+  $("#bars").innerHTML=streams.map(s=>`<div class="bar"><span>${s[0]}</span><div class="tr"><i style="width:${s[1]/mx*100}%;background:${s[2]}"></i></div><span class="v num">${won(s[1])}</span></div>`).join("")+`<p class="note">매출 비중: 상품 ${(goodsNet/rev*100||0).toFixed(0)}% · 구독 ${(sub/rev*100||0).toFixed(0)}% · 클래스 ${(cls/rev*100||0).toFixed(0)}%</p>`;
+  $("#pl").innerHTML=[["매출 합계",rev],["상품·구독 원가",-cCogs],["스마트스토어 수수료",-cFee],["배송·포장비",-cShip],["크리에이터 커미션",-cCreator],["매출총이익",gross,1],["광고비",-v.ads],["고정비",-v.fixed],["영업이익",op,2]].map(r=>`<tr class="${r[2]===2?"t":""}"><td>${r[2]?"<b>"+r[0]+"</b>":r[0]}</td><td style="color:${r[1]<0?"var(--bad)":r[2]===2?(r[1]>=0?"var(--ok)":"var(--bad)"):"inherit"}">${won(r[1])}</td></tr>`).join("");
+}
+
+/* ===== 운영자: 주문 ===== */
+const STATUSES=["입금대기","입금확인","배송준비","배송중","배송완료","스마트스토어 이동","취소"];
+const stClass=s=>({"입금대기":"wait","입금확인":"paid","배송준비":"paid","배송중":"ship","배송완료":"ship","스마트스토어 이동":"ss","취소":"cancel"}[s]||"");
+function renderOrders(){
+  const t=$("#orders");if(!t)return;
+  const wait=orders.filter(o=>o.status==="입금대기");
+  $("#orderSummary").textContent=`전체 ${orders.length}건 · 입금대기 ${wait.length}건 (${won(wait.reduce((a,b)=>a+b.total,0))})`;
+  if(!orders.length){t.innerHTML=`<tr><td class="note" style="padding:20px">아직 주문이 없어요. 스토어에서 계좌이체로 테스트 주문을 넣어 보세요.</td></tr>`;return}
+  t.innerHTML=`<thead><tr><th>주문번호 / 일시</th><th>주문자</th><th>상품</th><th>금액</th><th>결제</th><th>상태</th></tr></thead><tbody>`+orders.map((o,i)=>{const d=new Date(o.at);const late=o.status==="입금대기"&&Date.now()>new Date(o.deadline).getTime();return `<tr><td><b class="num">${o.no}</b><br><span class="note num">${d.getMonth()+1}/${d.getDate()} ${String(d.getHours()).padStart(2,"0")}:${String(d.getMinutes()).padStart(2,"0")}</span></td><td>${esc(o.name)}<br><span class="note">${esc(o.phone)}</span>${o.method==="bank"?`<br><span class="note">입금자 ${esc(o.dep)}</span>`:""}</td><td style="max-width:240px">${o.items.map(x=>esc(x.name)+" ×"+x.qty).join("<br>")}</td><td class="num"><b>${won(o.total)}</b></td><td>${o.method==="bank"?"계좌이체":"스마트스토어"}${o.receipt&&o.receipt!=="none"?`<br><span class="note">현금영수증</span>`:""}</td><td><span class="st ${stClass(o.status)}">${o.status}</span>${late?`<br><span class="note" style="color:var(--bad)">기한 초과</span>`:""}<br><select data-os="${i}" aria-label="상태 변경" style="margin-top:4px">${STATUSES.map(s=>`<option ${s===o.status?"selected":""}>${s}</option>`).join("")}</select></td></tr>`}).join("")+`</tbody>`;
+  t.querySelectorAll("[data-os]").forEach(s=>s.onchange=()=>{orders[+s.dataset.os].status=s.value;save("hl_orders",orders);renderOrders();toast("주문 상태를 바꿨어요")});
+}
+function ordersCSV(){
+  const h=["주문번호","일시","결제","상태","주문자","연락처","입금자","주소","상품","금액"];
+  const rows=orders.map(o=>[o.no,o.at,o.method==="bank"?"계좌이체":"스마트스토어",o.status,o.name,o.phone,o.dep,o.addr,o.items.map(x=>x.name+"("+x.opt+")x"+x.qty).join(" / "),o.total]);
+  return [h,...rows].map(r=>r.map(c=>`"${String(c??"").replace(/"/g,'""')}"`).join(",")).join("\n");
+}
+function renderSettings(){
+  $("#setSS").value=S.smartstore;$("#setBank").value=S.bank;$("#setAcct").value=S.account;$("#setHolder").value=S.holder;$("#setHours").value=S.depositHours;
+  $("#footAcct").textContent=`${S.bank} ${S.account} (${S.holder})`;
+  $("#footSS").href=ssLink();$("#buyNaver").href=ssLink();
+}
+
+/* ===== 라우팅 & 이벤트 ===== */
+function route(){
+  const admin=location.hash==="#admin";
+  document.body.classList.toggle("admin",admin);
+  $("#fabCart").style.display=admin?"none":"";
+  if(admin)window.scrollTo(0,0);
+}
+document.addEventListener("click",e=>{
+  const tl=e.target.closest("[data-trylook]");if(tl&&window.setTryLook)setTryLook(tl.dataset.trylook);
+  const add=e.target.closest("[data-add]");
+  if(add){e.stopPropagation();const p=PRODUCTS.find(x=>x.id===add.dataset.add);addCart(add.dataset.add,p?p.opts[0]:undefined,1);return}
+  if(e.target.closest("[data-stop]")){e.stopPropagation();return}
+  const pd=e.target.closest("[data-pd]");
+  if(pd){openPD(pd.dataset.pd);return}
+  const cl=e.target.closest("[data-close]");
+  if(cl){closeModal(cl.dataset.close);return}
+  if(e.target.closest("[data-closecart]"))closeCart();
+  if(e.target.closest("#mainNav a")){$("#mainNav").classList.remove("open");$("#menuBtn").setAttribute("aria-expanded","false")}
+});
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape"){closeCart();closeModal("pdModal");closeModal("coModal")}
+  if(e.key==="Enter"&&e.target.matches("[data-pd]"))openPD(e.target.dataset.pd);
+});
+$("#cartBtn").onclick=openCart;
+$("#searchBtn").onclick=()=>{location.hash="#shop";setTimeout(()=>$("#q").focus(),300)};
+$("#q").oninput=()=>renderProducts();
+$("#buyBank").onclick=()=>{if(cart.length)openCheckout();else{location.hash="#shop";toast("상품을 먼저 장바구니에 담아 주세요")}};$("#fabCart").onclick=openCart;$("#closeCart").onclick=closeCart;
+$("#scrim").onclick=()=>{closeCart();closeModal("pdModal");closeModal("coModal")};
+$("#menuBtn").onclick=()=>{const o=$("#mainNav").classList.toggle("open");$("#menuBtn").setAttribute("aria-expanded",o)};
+["cfol","cconv","caov"].forEach(id=>$("#"+id).oninput=creatorCalc);
+$("#applyCreator").onclick=()=>copy(`[여주메이크업연구소 크리에이터 파트너 신청]\n활동명:\n채널 링크:\n팔로워 수: ${(+$("#cfol").value).toLocaleString("ko-KR")}\n주요 콘텐츠(코스프레/뷰티/일상):\n희망 할인 코드:\n연락처:`,"신청서 양식을 복사했어요");
+$("#copyCsv").onclick=()=>orders.length?copy(ordersCSV(),"주문 CSV를 복사했어요. 엑셀에 붙여 넣으세요"):toast("복사할 주문이 없어요");
+$("#clearOrders").onclick=()=>{const b=$("#clearOrders");if(b.dataset.c){orders=[];save("hl_orders",orders);renderOrders();b.textContent="테스트 주문 삭제";delete b.dataset.c;toast("주문을 모두 지웠어요")}else{b.dataset.c=1;b.textContent="한 번 더 누르면 삭제";setTimeout(()=>{b.textContent="테스트 주문 삭제";delete b.dataset.c},3000)}};
+$("#saveSettings").onclick=()=>{S.smartstore=$("#setSS").value.trim()||STORE.smartstore;S.bank=$("#setBank").value.trim();S.account=$("#setAcct").value.trim();S.holder=$("#setHolder").value.trim();S.depositHours=Math.max(1,+$("#setHours").value||24);save("hl_settings",{smartstore:S.smartstore,bank:S.bank,account:S.account,holder:S.holder,depositHours:S.depositHours});renderSettings();renderProducts();toast("결제 설정을 저장했어요")};
+window.addEventListener("hashchange",route);
+
+function heroInit(){
+  let cur="magical";
+  const draw=()=>{["heroAfter","heroBefore"].forEach(id=>{const cv=$("#"+id);cv.dataset.look=cur;delete cv.dataset.done});paintEyes();const l=LOOKS.find(x=>x.id===cur);$("#heroCap").innerHTML=`<b>${l.name}</b> · ${l.mood}`;$("#heroKit").innerHTML=`${kitList(l)}<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:12px;flex-wrap:wrap"><span class="price num"><s>${won(l.orig)}</s>${won(l.price)}</span><button class="btn pink" data-add="k_${l.id}">이 룩 키트 담기</button></div>`;$("#heroLooks").innerHTML=LOOKS.map(x=>`<button class="chip ${x.id===cur?"on":""}" data-hl="${x.id}">${x.name.replace(" 룩","")}</button>`).join("");$("#heroLooks").querySelectorAll("[data-hl]").forEach(b=>b.onclick=()=>{cur=b.dataset.hl;draw()})};
+  const set=v=>{$("#heroBefore").style.clipPath=`inset(0 ${100-v}% 0 0)`;$("#cmpLine").style.left=v+"%"};
+  $("#cmpRange").oninput=e=>set(+e.target.value);set(40);
+  const cmp=$("#cmp");let drag=false;const mv=e=>{if(!drag)return;const rc=cmp.getBoundingClientRect();const v=Math.max(0,Math.min(100,(e.clientX-rc.left)/rc.width*100));$("#cmpRange").value=v;set(v)};
+  cmp.addEventListener("pointerdown",e=>{drag=true;mv(e)});window.addEventListener("pointermove",mv);window.addEventListener("pointerup",()=>drag=false);
+  window.setTryLook=id=>{cur=id;draw()};
+  draw();
+}
+heroInit();renderHot();renderQuiz();renderLooks();renderFilters();renderProducts();renderPlans();renderClasses();creatorCalc();renderCart();renderSim();renderOrders();renderSettings();route();
+</script>
+</body>
+</html>
